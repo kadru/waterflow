@@ -82,5 +82,13 @@ RSpec.describe Waterflow, type: :model do
         end.to raise_error(Waterflow::InvalidRiverError)
       end
     end
+
+    context 'when river captured_at is nil' do
+      it 'returns nil' do
+        waterflow = Waterflow.new captured_at: nil
+
+        expect(waterflow.local_captured_at).to be_nil
+      end
+    end
   end
 end

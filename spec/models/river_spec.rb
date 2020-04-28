@@ -43,8 +43,10 @@ RSpec.describe River, type: :model do
     context 'when invalid URL is given' do
       it 'must be invalid' do
         river = build(:river, url: 'invalid url')
+        river_without_host = build(:river, url: '/get')
 
         expect(river).not_to be_valid
+        expect(river_without_host).not_to be_valid
       end
     end
   end
