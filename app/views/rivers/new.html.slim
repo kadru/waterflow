@@ -1,0 +1,25 @@
+h3 Nuevo rio
+
+= form_with model: river, local: true do |f|
+  .row
+    .col.s12
+      .input-field
+        = f.label :ibcw_id
+        = f.text_field :ibcw_id
+    .col.s12
+      .input-field
+        = f.label :name
+        = f.text_field :name
+    .col.s12
+      .input-field
+        = f.label :url
+        = f.text_field :url
+    .col.s12
+      .input-field
+        = f.time_zone_select :time_zone, ActiveSupport::TimeZone.country_zones('MX'), {}
+        = f.label :time_zone
+  .row
+    .col.s12
+      = f.button type: :submit, class: 'btn waves-effect waves-light' do
+        | Guardar
+        i.material-icons.right send

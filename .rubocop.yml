@@ -10,5 +10,12 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '.git/**/*'
+    - 'db/**/*'
 Metrics/LineLength:
   Max: 100
+Metrics/BlockLength:
+  Exclude:
+    - '**/*.gemspec'
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'

@@ -1,0 +1,32 @@
+table.highlight
+  thead
+    tr
+      th Id
+      th Nombre
+      th Zona Horaria
+      th URL
+      th
+  tbody
+    - rivers.each do |river|
+      tr
+        td 
+          = river.ibcw_id
+        td
+          = river.name
+        td
+          = river.time_zone
+        td
+          = link_to river.url, target: '_blank' do
+            i.material-icons link
+        td
+.row
+  .col.s12.center-align
+    == pagy_materialize_nav(pagy)
+
+.fixed-action-btn
+  button.btn-floating.btn-large
+    i.large.material-icons mode_edit
+  ul
+    li
+      = link_to new_river_path, class: 'btn-floating tooltipped', data: { position: 'left', tooltip: 'nuevo rio'} do
+        i.material-icons add

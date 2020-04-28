@@ -1,0 +1,6 @@
+ALL DATA ARE PROVISIONAL AND SUBJECT TO REVISION
+08373000 Rio Conchos Near Ojinaga, Chih.
+    Date     Time
+             invalid       Stage (m)          Discharge (cms)        
+01/31/2020   23:00       1.233                 0.77
+01/31/2020   22:45       1.233                 0.77
