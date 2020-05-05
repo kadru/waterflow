@@ -151,7 +151,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     pagy (3.7.3)
     parallel (1.19.1)
-    parser (2.7.1.1)
+    parser (2.7.1.2)
       ast (~> 2.4.0)
     pg (1.2.2)
     public_suffix (4.0.3)
@@ -258,7 +258,7 @@ GEM
     slim (4.0.1)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
-    solargraph (0.39.3)
+    solargraph (0.39.4)
       backport (~> 1.1)
       benchmark
       bundler (>= 1.17.2)
