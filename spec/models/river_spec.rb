@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe River, type: :model do
   describe 'associations' do
-    it { is_expected.to have_many(:waterflows) }
+    it { is_expected.to have_many(:waterflows).dependent(:destroy) }
   end
 
   describe '.for_select' do
@@ -55,5 +55,13 @@ RSpec.describe River, type: :model do
     it { is_expected.to validate_presence_of(:offset) }
     it { is_expected.to validate_numericality_of(:offset).only_integer }
     it { is_expected.to validate_inclusion_of(:offset).in_range(-43_200..50_400) }
+  end
+
+  describe '#offset_hours' do
+    it { is_expected.to validate_numericality_of(:offset_hours).only_integer }
+  end
+
+  describe '#offset_minutes' do
+    it { is_expected.to validate_numericality_of(:offset_minutes).only_integer }
   end
 end

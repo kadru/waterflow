@@ -15,6 +15,7 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+const M = require('materialize-css');
 const datePicker = require('materialize/datePicker')
 const sidenav = require('materialize/sidenav')
 const formSelect = require('materialize/formSelect')
@@ -27,6 +28,11 @@ document.addEventListener('turbolinks:load', () => {
   sidenavs = sidenav.default.initialize();
   floatingActionButton.default.initialize();
   tooltip.default.initialize();
+  
+  // to set active prefilled inputs
+  setTimeout(() => {
+    M.updateTextFields();
+  }, 100);
 });
 
 document.addEventListener('turbolinks:before-cache', () => {

@@ -16,7 +16,7 @@ class Waterflow < ApplicationRecord
             numericality: true
 
   def unique_error?(attribute)
-    errors.added?(attribute, 'ya está en uso') # must be :taken but added? method is bugged
+    errors.of_kind?(attribute, :taken)
   end
 
   def local_captured_at

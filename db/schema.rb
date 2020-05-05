@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_221837) do
     t.text "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "offset", default: 0
+    t.integer "offset"
     t.index ["ibcw_id"], name: "index_rivers_on_ibcw_id", unique: true
   end
 

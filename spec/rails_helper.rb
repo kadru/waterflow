@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-# require 'webdrivers/geckodriver'
-# require 'selenium-webdriver'
 require 'capybara/rspec'
 require 'sidekiq/testing'
 
@@ -33,21 +31,44 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  # must be false for database cleaner
+  config.use_transactional_fixtures = false
+  config.include FactoryBot::Syntax::Methods
+
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
+    # :rack_test driver's Rack app under test shares database connection
+    # with the specs, so continue to use transaction strategy for speed.
+    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+
+    unless driver_shares_db_connection_with_specs
+      # Driver is probably for an external browser with an app
+      # under test that does *not* share a database connection with the
+      # specs, so use truncation strategy.
+      DatabaseCleaner.strategy = :truncation
     end
   end
 
-  config.use_transactional_fixtures = true
-  config.include FactoryBot::Syntax::Methods
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-  config.before(:each, type: :system) do
+  config.append_after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  config.before(:all, type: :system) do
+    WebMock.disable_net_connect!(allow_localhost: true, allow: %r{github.com})
+  end
+
+  config.before(:all, js: true) do
     driven_by :selenium, using: :headless_firefox
   end
 

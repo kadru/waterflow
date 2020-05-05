@@ -1,0 +1,31 @@
+= form_with model: river, local: true, id: 'river-form' do |f|
+  .row
+    .col.s12
+      .input-field
+        = f.label :ibcw_id
+        = f.text_field :ibcw_id
+  .row
+    .col.s12
+      .input-field
+        = f.label :name
+        = f.text_field :name
+  .row
+    .col.s12
+      .input-field
+        = f.label :url
+        = f.text_field :url
+  .row
+    .col.s6
+      .input-field
+        = f.label :offset_hours
+        = f.number_field :offset_hours, min: -12, max: 14, value: river.offset_time.hours
+    .col.s6
+      .input-field
+        = f.label :offset_minutes
+        = f.number_field :offset_minutes, min: 0, max: 59, value: river.offset_time.minutes
+
+  .row
+    .col.s12
+      = f.button type: :submit, class: 'btn waves-effect waves-light' do
+        | Guardar
+        i.material-icons.right send

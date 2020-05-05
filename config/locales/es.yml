@@ -2,10 +2,12 @@ es:
   activerecord:
     attributes:
       river:
-        ibcw_id: id
+        ibcw_id: ibcw id
         name: nombre
         url: url
-        time_zone: zona horaria
+        offset: deplazamiento de zona horaria
+        offset_hours: desplaz. horas
+        offset_minutes: desplaz. minutos
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'
@@ -18,11 +20,6 @@ es:
         start_date: 'fecha inicial'
         end_date: 'fecha final'
         river_id: 'rio'
-      river:
-        name: nombre
-        url: url
-        time_zone: zona horaria
-        ibcw_id: id
     errors:
       models:
         report_form:
@@ -31,6 +28,15 @@ es:
               greater_than: 'no puede ser mayor que %{attribute}'
             end_date:
               smaller_than: 'no puede ser menor que %{attribute}'
+  dialog:
+    confirmation: ¿Está seguro de realizar esta acción?
+  flash:
+    success:
+      create: Creado
+      update: Actualizado
+    failure:
+      create: No se pudo crear
+      update: No se pudo actualizar
   date:
     abbr_day_names:
     - dom
