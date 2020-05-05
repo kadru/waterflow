@@ -3,13 +3,15 @@ html
   head
     title
       = content_for?(:page_title) ? yield(:page_title) : page_title || 'WAD'
+
     = csrf_meta_tags
     = csp_meta_tag
-
+    = favicon_link_tag
     = stylesheet_link_tag 'application', media: 'all, projection', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons', media: nil
-
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    meta name='theme-color' content='#00b8d4'
   body
     nav
       .nav-wrapper
