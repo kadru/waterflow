@@ -1,0 +1,24 @@
+#clearance.password-reset
+  .row
+    .col.s12.offset-m2.m8.offset-l2.l8
+      .card.hoverable
+        .card-content
+          .card-title
+            h4
+              = t(".title")
+
+          p
+            = t(".description")
+
+          = form_for :password_reset,
+            url: user_password_path(@user, token: @user.confirmation_token),
+            html: { method: :put } do |f|
+            .row
+              .col.s12
+                = f.label :password
+                = f.password_field :password
+            .row
+              .col.s12
+                = f.button type: :submit, class: 'btn waves-effect waves-light btn-block' do
+                  = t('helpers.submit.password_reset.submit')
+                  i.material-icons.right send

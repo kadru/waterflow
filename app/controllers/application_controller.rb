@@ -2,6 +2,7 @@
 
 # Main controller
 class ApplicationController < ActionController::Base
+  include Clearance::Controller
   include Pagy::Backend
   helper_method :page_title
 

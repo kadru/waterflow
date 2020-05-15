@@ -60,7 +60,11 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
     backport (1.1.2)
+    bcrypt (3.1.13)
     benchmark (0.1.0)
+    benchmark-malloc (0.2.0)
+    benchmark-perf (0.6.0)
+    benchmark-trend (0.4.0)
     bindex (0.8.1)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -75,6 +79,13 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
+    clearance (2.1.0)
+      actionmailer (>= 5.0)
+      activemodel (>= 5.0)
+      activerecord (>= 5.0)
+      bcrypt (>= 3.1.1)
+      email_validator (~> 2.0)
+      railties (>= 5.0)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
     crack (0.4.3)
@@ -86,6 +97,8 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     e2mmap (0.1.0)
+    email_validator (2.0.1)
+      activemodel
     erubi (1.9.0)
     et-orbi (1.2.4)
       tzinfo
@@ -200,6 +213,15 @@ GEM
     regexp_parser (1.7.0)
     reverse_markdown (1.4.0)
       nokogiri
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
+    rspec-benchmark (0.6.0)
+      benchmark-malloc (~> 0.2)
+      benchmark-perf (~> 0.6)
+      benchmark-trend (~> 0.4)
+      rspec (>= 3.0)
     rspec-core (3.9.2)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.1)
@@ -325,6 +347,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (~> 3.30)
+  clearance
   database_cleaner (~> 1.7.0)
   exception_notification
   factory_bot_rails
@@ -335,6 +358,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 4.3)
   rails (~> 6.0.2, >= 6.0.2.2)
+  rspec-benchmark
   rspec-rails (= 3.9.0)
   rubocop (~> 0.79.0)
   sass-rails (>= 6)

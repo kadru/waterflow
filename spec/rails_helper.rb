@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
 require 'capybara/rspec'
 require 'sidekiq/testing'
 
@@ -65,7 +64,7 @@ RSpec.configure do |config|
   end
 
   config.before(:all, type: :system) do
-    WebMock.disable_net_connect!(allow_localhost: true, allow: %r{github.com})
+    WebMock.disable_net_connect!(allow_localhost: true, allow: /github.com/)
   end
 
   config.before(:all, js: true) do

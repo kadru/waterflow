@@ -1,0 +1,21 @@
+#clearance.sign-up
+  .row
+    .col.s12.offset-m2.m8.offset-l2.l8
+      .card.hoverable
+        .card-content
+          .card-title
+            h4
+              = t(".title")
+
+          = form_for @user do |f|
+            = render partial: '/users/form', object: f
+
+            .row
+              .col.s12
+                = f.button type: :submit, class: 'btn waves-effect waves-light btn-block' do
+                  = t('helpers.submit.user.create')
+                  i.material-icons.right send
+
+
+        .card-action
+          = link_to t(".sign_in"), sign_in_path

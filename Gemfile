@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'clearance'
 gem 'exception_notification'
 gem 'http'
 gem 'pagy'
@@ -38,6 +39,7 @@ group :test do
   gem 'capybara', '~> 3.30'
   gem 'database_cleaner', '~> 1.7.0'
   gem 'factory_bot_rails'
+  gem 'rspec-benchmark'
   gem 'selenium-webdriver', '~> 3.142.7'
   gem 'shoulda-matchers', '~> 4.2.0'
   gem 'simplecov', require: false

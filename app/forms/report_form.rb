@@ -3,7 +3,12 @@
 # Validates report form data
 class ReportForm
   include ActiveModel::Model
-  attr_accessor :start_date, :end_date, :river_id
+  include ActiveModel::Attributes
+
+  # river_id tests doesnt pass with the follow api: attribute :river_id, :integer
+  attr_accessor :river_id
+  attribute :start_date, :date
+  attribute :end_date, :date
 
   validates_presence_of :start_date, :end_date, :river_id
   validates_numericality_of :river_id, only_integer: true

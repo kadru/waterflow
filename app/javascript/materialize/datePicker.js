@@ -14,7 +14,7 @@ const datePicker = {
         weekdaysShort: ["Dom","Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
         weekdaysAbbrev: ["D","L", "M", "M", "J", "V", "S"]
       },
-      format: 'mm/dd/yyyy'
+      format: 'yyyy/mm/dd'
     }
     const elems = document.querySelectorAll('.datepicker');
     return M.Datepicker.init(elems, datePickerOptions);

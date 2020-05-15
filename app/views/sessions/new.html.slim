@@ -1,0 +1,13 @@
+#clearance.sign-in
+  .row
+    .col.s12.offset-m2.m8.offset-l2.l8
+      .card.hoverable
+        .card-content
+          .card-title
+            h4
+              = t(".title")
+          = render partial: '/sessions/form'
+
+        .card-action
+          = link_to t(".sign_up"), sign_up_path, class: 'right'
+          = link_to t(".forgot_password"), new_password_path

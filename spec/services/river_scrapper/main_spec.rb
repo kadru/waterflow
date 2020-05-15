@@ -92,4 +92,38 @@ RSpec.describe RiverScrapper::Main do
       end
     end
   end
+
+  describe 'benchmark', :perf do
+    let(:body) { 'wad.txt' }
+    let(:status) { 200 }
+    let(:river) do
+      create(:river, url: 'https://ibwc.gov/wad/373000_a.txt', offset: -6.hours.seconds)
+    end
+
+    before do
+      WebMock.allow_net_connect!
+    end
+
+    after do
+      stub_request(
+        :get,
+        'https://ibwc.gov/river_id.txt'
+      ).to_return(
+        body: file_fixture(body),
+        status: status
+      )
+    end
+
+    it 'allocates memory below 5mb' do
+      expect do
+        described_class.call(river)
+      end.to perform_allocation(1)
+    end
+
+    it 'performs under 1 minute' do
+      expect do
+        described_class.call(river)
+      end.to perform_under(60)
+    end
+  end
 end
