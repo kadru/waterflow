@@ -33,6 +33,7 @@ RSpec.configure do |config|
   # must be false for database cleaner
   config.use_transactional_fixtures = false
   config.include FactoryBot::Syntax::Methods
+  config.include ActiveSupport::Testing::TimeHelpers
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
@@ -65,6 +66,7 @@ RSpec.configure do |config|
 
   config.before(:all, type: :system) do
     WebMock.disable_net_connect!(allow_localhost: true, allow: /github.com/)
+    driven_by :rack_test
   end
 
   config.before(:all, js: true) do

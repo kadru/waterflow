@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-if ENV['SIMPLE_COV']
+if ENV.fetch('SIMPLE_COV', false)
   require 'simplecov'
   SimpleCov.start 'rails' do
     enable_coverage :branch

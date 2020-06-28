@@ -19,33 +19,37 @@ html
         a#materialize-select.sidenav-trigger href="#" data-target="mobile-menu" data-turbolinks-permanent=''
           i.material-icons menu
         ul#nav-mobile.right.hide-on-med-and-down
-          li class="#{'active' if current_page?(rivers_path)}"
-            = link_to 'Rios', rivers_path
-          li class="#{'active' if current_page?(new_reports_path)}"
-            = link_to 'Reportes', new_reports_path
+          - if signed_in?
+            li class="#{'active' if current_page?(rivers_path)}"
+              = link_to 'Rios', rivers_path
+            li class="#{'active' if current_page?(new_reports_path)}"
+              = link_to 'Reportes', new_reports_path
           li
-            - if signed_in?
-              = link_to sign_out_path, method: :delete, class: 'waves-effect waves-light btn' do
-                = t('layouts.application.sign_out')
-                i.material-icons.right exit_to_app
+            - if signed_out?
+              = link_to t('layouts.application.sign_in'),
+                sign_in_path,
+                class: 'waves-efffect waves-light btn'
             - else
-              = link_to sign_in_path, class: 'waves-effect waves-ligth btn' do
-                = t('layouts.application.sign_in')
-                i.material-icons.right account_circle
+              = link_to t('layouts.application.sign_out'),
+                sign_out_path,
+                method: :delete,
+                class: 'waves-effect waves-light btn'
+
         ul#mobile-menu.sidenav
-          li class="#{'active' if current_page?(rivers_path)}"
-            = link_to 'Rios', rivers_path
-          li class="#{'active' if current_page?(new_reports_path)}"
-            = link_to 'Reportes', new_reports_path
+          -if signed_in?
+            li class="#{'active' if current_page?(rivers_path)}"
+              = link_to 'Rios', rivers_path
+            li class="#{'active' if current_page?(new_reports_path)}"
+              = link_to 'Reportes', new_reports_path
           li
             - if signed_in?
-              = link_to sign_out_path, class: 'waves-effect waves-light btn' do
-                = t('layouts.application.sign_out')
-                i.material-icons.right exit_to_app
+              = link_to t('layouts.application.sign_out'),
+                sign_out_path,
+                class: 'waves-effect waves-light btn'
             - else
-              = link_to sign_in_path, class: 'waves-effect waves-ligth btn' do
-                = t('layouts.application.sign_in')
-                i.material-icons.right account_circle
+              = link_to t('layouts.application.sign_in'),
+                sign_in_path,
+                class: 'waves-effect waves-ligth btn'
 
     .container
       = yield

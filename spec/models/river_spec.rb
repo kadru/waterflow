@@ -55,6 +55,15 @@ RSpec.describe River, type: :model do
     it { is_expected.to validate_presence_of(:offset) }
     it { is_expected.to validate_numericality_of(:offset).only_integer }
     it { is_expected.to validate_inclusion_of(:offset).in_range(-43_200..50_400) }
+
+    context 'when #offset_hours and #offset_minutes have value' do
+      it 'they set value of #offset' do
+        subject = described_class.new offset_hours: 1, offset_minutes: 30
+        subject.valid?
+
+        expect(subject.offset).to eq(5400)
+      end
+    end
   end
 
   describe '#offset_hours' do
@@ -63,5 +72,48 @@ RSpec.describe River, type: :model do
 
   describe '#offset_minutes' do
     it { is_expected.to validate_numericality_of(:offset_minutes).only_integer }
+  end
+
+  describe '#waterflows_captured_at_between' do
+    it 'returns waterflows between given dates' do
+      river = create(:river)
+      create(
+        :waterflow,
+        captured_at: Time.zone.local(2020, 6, 14, 1),
+        river: river
+      )
+      create(
+        :waterflow,
+        captured_at: Time.zone.local(2020, 6, 10, 1),
+        river: river
+      )
+      create(
+        :waterflow,
+        captured_at: Time.zone.local(2020, 6, 15),
+        river: river
+      )
+
+      waterflows = river.waterflows_captured_at_between('2020-06-11', '2020-06-14')
+
+      expect(waterflows).to all(
+        have_attributes(captured_at: be < Time.zone.local(2020, 6, 15))
+      )
+      expect(waterflows).to all(
+        have_attributes(captured_at: be > Time.zone.local(2020, 6, 10))
+      )
+      expect(waterflows.size).to eq 1
+    end
+  end
+
+  describe '#as_view' do
+    it 'returns a view object' do
+      expect(subject.as_view).to be_instance_of(RiverView)
+    end
+  end
+
+  describe '#offset_time' do
+    it 'returns an offset object' do
+      expect(subject.offset_time).to be_instance_of(Offset)
+    end
   end
 end

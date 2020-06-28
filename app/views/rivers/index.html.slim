@@ -17,7 +17,10 @@ table.highlight
           = link_to edit_river_path(river) do
             i.material-icons edit
         td
-          = link_to river_path(river), method: :delete, id: "destroy-river-#{river.id}", data: { confirm: t('dialog.confirmation') } do
+          = link_to(river_path(river),
+            method: :delete,
+            id: "destroy-river-#{river.id}",
+            data: { confirm: t('dialog.confirmation') }) do
             i.material-icons delete
 .row
   .col.s12.center-align

@@ -33,6 +33,7 @@ document.addEventListener('turbolinks:load', () => {
   setTimeout(() => {
     M.updateTextFields();
   }, 100);
+  M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'))
 });
 
 document.addEventListener('turbolinks:before-cache', () => {

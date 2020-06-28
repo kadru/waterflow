@@ -2,7 +2,7 @@
 
 # Stores waterflow data of rivers
 class Waterflow < ApplicationRecord
-  class InvalidRiverError < StandardError; end
+  InvalidRiverError = Class.new(StandardError)
   belongs_to :river
 
   validates :captured_at,
@@ -14,6 +14,14 @@ class Waterflow < ApplicationRecord
             numericality: true
   validates :stage,
             numericality: true
+
+  scope :captured_at_between, lambda { |start_date, end_date|
+    where(
+      'captured_at BETWEEN ? AND ?',
+      start_date.to_date.at_beginning_of_day,
+      end_date.to_date.end_of_day
+    )
+  }
 
   def unique_error?(attribute)
     errors.of_kind?(attribute, :taken)

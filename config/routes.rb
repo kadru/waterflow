@@ -21,6 +21,6 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   root 'home#index'
-  resources :rivers
+  resources :rivers, except: [:show]
   resource :reports, only: %i[new create]
 end

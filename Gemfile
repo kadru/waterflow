@@ -7,6 +7,7 @@ ruby '2.6.6'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clearance'
+gem 'csv'
 gem 'exception_notification'
 gem 'http'
 gem 'pagy'

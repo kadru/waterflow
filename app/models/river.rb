@@ -27,6 +27,8 @@ class River < ApplicationRecord
 
   attr_accessor :offset_hours, :offset_minutes
 
+  delegate :captured_at_between, to: :waterflows, prefix: true
+
   def self.for_select
     pluck(:name, :id)
   end

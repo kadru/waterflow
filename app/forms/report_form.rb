@@ -5,7 +5,8 @@ class ReportForm
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  # river_id tests doesnt pass with the follow api: attribute :river_id, :integer
+  # river_id tests doesn't pass with the follow
+  # api: attribute :river_id, :integer
   attr_accessor :river_id
   attribute :start_date, :date
   attribute :end_date, :date

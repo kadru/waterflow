@@ -2,6 +2,8 @@
 
 # River CRUD
 class RiversController < ApplicationController
+  before_action :require_login
+
   def index
     pagy, rivers = pagy(River.all.order(:id))
     render(

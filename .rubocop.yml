@@ -21,3 +21,5 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
 Style/FormatStringToken:
   Enabled: false
+Metrics/MethodLength:
+  Max: 20

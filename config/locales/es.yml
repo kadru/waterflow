@@ -1,4 +1,14 @@
 es:
+  mailer:
+    report_mailer:
+      river_report:
+        subject: 'Reporte flujo de agua del rio %{river_name}'
+  reports:
+    river_waterflow:
+      headers:
+        captured_at: fecha
+        stage: etapa
+        discharge: descarga
   activerecord:
     attributes:
       river:
@@ -34,9 +44,11 @@ es:
     success:
       create: Creado
       update: Actualizado
+      report: El reporte será enviado a tu correo
     failure:
       create: No se pudo crear
       update: No se pudo actualizar
+      report: No se pudo generar el reporte
   date:
     abbr_day_names:
     - dom
@@ -429,7 +441,7 @@ es:
     failure_when_not_signed_in: Debes ingresar al sistema para continuar.
   layouts:
     application:
-      sign_in: Entrar
+      sign_in: Iniciar sesión
       sign_out: Salir
   passwords:
     create:
@@ -444,7 +456,7 @@ es:
     new:
       sign_up: Registrarse
       forgot_password: ¿Olvidaste tu contraseña?
-      title: Entrar
+      title: Iniciar sesión
   users:
     new:
       sign_in: Entrar

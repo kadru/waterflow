@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-# Generate river wateflow report and send it via email
+# Manages generation for river reports
 class ReportsController < ApplicationController
+  before_action :require_login
+
   def new
     render :new, locals: { report_form: ReportForm.new, rivers: River.for_select }
   end
@@ -10,9 +12,9 @@ class ReportsController < ApplicationController
     report_form = ReportForm.new report_form_params
     if report_form.valid?
       call_worker(report_form)
-      flash.now[:success] = 'El reporte será enviado a tu correo'
+      flash.now[:success] = I18n.t('flash.success.report')
     else
-      flash.now[:error] = 'Fallido'
+      flash.now[:error] = I18n.t('flash.failure.report')
     end
     render :new, locals: { report_form: report_form, rivers: River.for_select }
   end
@@ -24,7 +26,7 @@ class ReportsController < ApplicationController
   end
 
   def call_worker(report_form)
-    Reports::RiverWorker.perform_async(
+    RiverReportWorker.perform_async(
       report_form.river_id,
       report_form.start_date.to_s,
       report_form.end_date.to_s,

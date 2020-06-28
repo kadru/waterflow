@@ -8,6 +8,33 @@ RSpec.describe Waterflow, type: :model do
     it { is_expected.to validate_presence_of(:river) }
   end
 
+  describe '.captured_at_between' do
+    it 'returns waterflow between given dates' do
+      create(
+        :waterflow,
+        captured_at: Time.zone.local(2020, 6, 14, 1)
+      )
+      create(
+        :waterflow,
+        captured_at: Time.zone.local(2020, 6, 10, 1)
+      )
+      create(
+        :waterflow,
+        captured_at: Time.zone.local(2020, 6, 15)
+      )
+
+      waterflows = described_class.captured_at_between('2020-06-11', '2020-06-14')
+
+      expect(waterflows).to all(
+        have_attributes(captured_at: be < Time.zone.local(2020, 6, 15))
+      )
+      expect(waterflows).to all(
+        have_attributes(captured_at: be > Time.zone.local(2020, 6, 10))
+      )
+      expect(waterflows.size).to eq 1
+    end
+  end
+
   describe '#stage' do
     it { is_expected.to validate_numericality_of(:stage) }
   end
