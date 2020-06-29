@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    title
+      = content_for?(:page_title) ? yield(:page_title) : page_title || 'WAD'
+
+    = csrf_meta_tags
+    = csp_meta_tag
+    = favicon_link_tag
+    = stylesheet_link_tag 'application', media: 'all, projection', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons', media: nil
+    meta name='viewport' content='width=device-width, initial-scale=1.0'
+    meta name='theme-color' content='#00b8d4'
+  body
+    nav
+      .nav-wrapper
+        = link_to 'WAD', root_path, class: 'brand-logo'
+        a#materialize-select.sidenav-trigger href="#" data-target="mobile-menu" data-turbolinks-permanent=''
+          i.material-icons menu
+        ul#nav-mobile.right.hide-on-med-and-down
+          - if signed_in?
+            li class="#{'active' if current_page?(rivers_path)}"
+              = link_to 'Rios', rivers_path
+            li class="#{'active' if current_page?(new_reports_path)}"
+              = link_to 'Reportes', new_reports_path
+          li
+            - if signed_out?
+              = link_to t('layouts.application.sign_in'),
+                sign_in_path,
+                class: 'waves-efffect waves-light btn'
+            - else
+              = link_to t('layouts.application.sign_out'),
+                sign_out_path,
+                method: :delete,
+                class: 'waves-effect waves-light btn'
+
+        ul#mobile-menu.sidenav
+          -if signed_in?
+            li class="#{'active' if current_page?(rivers_path)}"
+              = link_to 'Rios', rivers_path
+            li class="#{'active' if current_page?(new_reports_path)}"
+              = link_to 'Reportes', new_reports_path
+          li
+            - if signed_in?
+              = link_to t('layouts.application.sign_out'),
+                sign_out_path,
+                class: 'waves-effect waves-light btn'
+            - else
+              = link_to t('layouts.application.sign_in'),
+                sign_in_path,
+                class: 'waves-effect waves-ligth btn'
+
+    .container
+      = yield
+
+  javascript:
+    document.addEventListener('DOMContentLoaded', function() {
+      var flash = #{JSON.dump(flash.to_hash).html_safe};
+
+      Object.keys(flash).forEach(function(key){
+        M.toast({html: flash[key], displayLength: 10000});
+      });
+    });

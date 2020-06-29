@@ -1,0 +1,9 @@
+// Add this directive for every sass file to tell sprockets to recompile the assets
+/*
+*= depend_on _colors.scss
+*= depend_on _helpers.scss
+*/
+
+@import "colors.scss";
+@import "materialize-css/sass/materialize.scss";
+@import "helpers.scss";

@@ -9,7 +9,7 @@ require "active_storage/engine"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_mailbox/engine"
-require "action_text/engine"
+# require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
@@ -31,5 +31,10 @@ module WaterlfowApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.i18n.default_locale = :es
+
+    config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

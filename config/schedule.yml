@@ -1,0 +1,7 @@
+development:
+  spider_worker:
+    cron: "*/1 * * * *"
+    class: "SpiderWorker"
+    queue: spider_queue
+    args:
+      - 08373000

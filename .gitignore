@@ -32,3 +32,4 @@ yarn-debug.log*
 
 #ignore vscode config
 /.vscode/*
+coverage
