@@ -5,6 +5,10 @@ class SpiderWorker
   include Sidekiq::Worker
   sidekiq_options queue: :spider_queue
 
+  def self.perform(ibcw_id)
+    new.perform(ibcw_id)
+  end
+
   def perform(ibcw_id)
     river = River.find_by! ibcw_id: ibcw_id
     RiverScrapper::Main.call(river)

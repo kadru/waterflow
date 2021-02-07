@@ -13,7 +13,6 @@ if ENV.fetch('SIMPLE_COV', false)
 end
 
 require 'webmock/rspec'
-require 'rspec-benchmark'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -95,6 +94,5 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 
-  config.include RSpec::Benchmark::Matchers
   config.filter_run_excluding perf: true
 end
