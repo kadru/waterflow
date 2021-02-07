@@ -2,6 +2,7 @@
 
 require 'capybara/rspec'
 require 'sidekiq/testing'
+require 'byebug'
 
 ENV['RAILS_ENV'] ||= 'test'
 
