@@ -33,7 +33,7 @@ module WaterlfowApp
     config.generators.system_tests = nil
     config.i18n.default_locale = :es
 
-    config.action_mailer.default_url_options = { host: 'localhost:3000' }
+    config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
 
     config.active_job.queue_adapter = :sidekiq
   end
