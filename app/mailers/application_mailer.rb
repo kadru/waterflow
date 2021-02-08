@@ -2,6 +2,6 @@
 
 # Main mailer
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@waterflowapp.com', deliver_later_queue_name: 'default'
+  default from: ENV['DEFAULT_SENDER_EMAIL'], deliver_later_queue_name: 'default'
   layout 'mailer'
 end

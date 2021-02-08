@@ -26,10 +26,10 @@ ExceptionNotification.configure do |config|
   config.add_notifier(
     :email,
     email_prefix: '[ERROR] waterflow app',
-    # sender_address: %("Notifier" #{ENV['WORKER_SENDER_ERROR_EMAIL']}),
+    sender_address: %("Notifier" #{ENV['SENDER_ERROR_EMAIL']}),
     # exception_recipients: ENV['WORKER_RECIPIENT_ERROR_EMAIL'],
-    sender_address: %("Notifier" errors@waterflowapp.com),
-    exception_recipients: 'orivas155@gmail.com'
+    # sender_address: %("Notifier" errors@waterflowapp.com),
+    exception_recipients: ENV['ERROR_RECIPIENT_EMAIL']
   )
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
   # config.add_notifier :campfire, {
