@@ -2,6 +2,6 @@
 
 # Main mailer
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV['DEFAULT_SENDER_EMAIL'], deliver_later_queue_name: 'default'
+  default from: ENV['DEFAULT_SENDER_EMAIL']
   layout 'mailer'
 end
