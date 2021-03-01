@@ -20,7 +20,7 @@ class Waterflow < ApplicationRecord
       'captured_at BETWEEN ? AND ?',
       start_date.to_date.at_beginning_of_day,
       end_date.to_date.end_of_day
-    )
+    ).order(:captured_at)
   }
 
   def unique_error?(attribute)
