@@ -12,6 +12,14 @@ RSpec.describe ReportMailer, type: :mailer do
     # Maybe move this to config.before(:suite)
   end
 
+  before :all do
+    ENV['DEFAULT_SENDER_EMAIL'] = 'noreply@waterflowapp.com'
+  end
+
+  after :all do
+    ENV.delete 'DEFAULT_SENDER_EMAIL'
+  end
+
   describe '.river_report' do
     let(:mail) do
       river = create(:river, name: 'conchos')

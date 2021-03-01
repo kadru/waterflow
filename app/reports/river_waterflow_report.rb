@@ -3,6 +3,7 @@
 # River wateflow reports for given river and dates generate output to specified format
 class RiverWaterflowReport
   attr_reader :river, :start_date, :end_date
+
   def initialize(river:, start_date:, end_date:)
     @river = river
     @start_date = start_date

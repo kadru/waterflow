@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-# require 'support/shared_examples/authenticated'
 
 RSpec.describe 'Rivers reports', type: :system, js: true do
   feature 'generate river report' do
