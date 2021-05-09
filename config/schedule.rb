@@ -7,6 +7,10 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 #
+
+# to work with rbenv
+env :PATH, ENV['PATH']
+
 every 1.day, at: '12:00 am' do
   rake 'spider_worker:crawl_conchos'
 end
