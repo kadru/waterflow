@@ -12,7 +12,7 @@ AllCops:
     - '.git/**/*'
     - 'db/**/*'
 Metrics/LineLength:
-  Max: 100
+  Max: 120
 Metrics/BlockLength:
   Exclude:
     - '**/*.gemspec'

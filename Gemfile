@@ -15,6 +15,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.1'
 gem 'rails', '~> 6.1.0'
 gem 'sass-rails', '>= 6'
+gem 'sequel', require: false
+gem 'sequel_pg', require: false
 gem 'sidekiq', '~> 6.0'
 gem 'slim', '~> 4.0.1'
 gem 'turbolinks', '~> 5'
