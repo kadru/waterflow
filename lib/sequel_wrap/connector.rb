@@ -11,7 +11,7 @@ module SequelWrap
     # @param logger [Logger]
     def initialize(env:, logger:)
       @database_url = ENV['DATABASE_URL']
-      @params = database_url ? {} : read_database_config(env)
+      @params = read_database_config(env)
       @logger = logger
     end
 
@@ -30,16 +30,21 @@ module SequelWrap
 
     def select_connection
       if database_url.nil?
-        Sequel.connect(
-          adapter: adapter,
-          host: params['host'],
-          database: params['database'],
-          user: params['user'],
-          password: params['password']
-        )
+        Sequel.connect(conn_params)
       else
-        Sequel.connect(database_url)
+        Sequel.connect(database_url, max_connections: params['pool'])
       end
+    end
+
+    def conn_params
+      {
+        adapter: adapter,
+        host: params['host'],
+        database: params['database'],
+        user: params['user'],
+        password: params['password'],
+        max_connections: params['pool']
+      }
     end
 
     # Sequel adapter name for PostgreSQL is postgres and for ActiveRecord is postgresql
@@ -49,8 +54,7 @@ module SequelWrap
 
     def read_database_config(env)
       config_file = File.expand_path('./config/database.yml')
-      database_config = File.open(config_file) { |file| YAML.safe_load(file, aliases: true) }
-
+      database_config = YAML.safe_load(ERB.new(File.read(config_file)).result, aliases: true)
       database_config.fetch(env)
     end
   end

@@ -26,6 +26,7 @@ RSpec.describe SequelWrap::Connector do
         expect(db.database_type).to eq(:postgres)
         expect(db.loggers).to eq([logger])
         expect(db.opts[:database]).to eq('postgres')
+        expect(db.opts[:max_connections]).to eq(5)
       end
     end
 
@@ -40,6 +41,7 @@ RSpec.describe SequelWrap::Connector do
         expect(db.database_type).to eq(:postgres)
         expect(db.opts[:database]).to eq('waterflow_app_test')
         expect(db.loggers).to eq([logger])
+        expect(db.opts[:max_connections]).to eq(5)
       end
     end
 
