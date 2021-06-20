@@ -37,5 +37,6 @@ module WaterlfowApp
     config.action_mailer.deliver_later_queue_name = :default
 
     config.active_job.queue_adapter = :sidekiq
+    config.generators.template_engine = :slim
   end
 end
