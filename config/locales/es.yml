@@ -1,17 +1,17 @@
 es:
   mailer:
     report_mailer:
-      river_report:
-        subject: 'Reporte flujo de agua del rio %{river_name}'
+      gage_report:
+        subject: 'Reporte flujo de agua del rio %{gage_name}'
   reports:
-    river_waterflow:
+    gage_waterflow:
       headers:
         captured_at: fecha
         stage: etapa
         discharge: descarga
   activerecord:
     attributes:
-      river:
+      gage:
         ibcw_id: ibcw id
         name: nombre
         url: url
@@ -29,7 +29,7 @@ es:
       report_form:
         start_date: 'fecha inicial'
         end_date: 'fecha final'
-        river_id: 'rio'
+        gage_id: 'rio'
     errors:
       models:
         report_form:

@@ -3,18 +3,18 @@
 require 'rails_helper'
 require 'csv'
 
-RSpec.describe RiverWaterflowReport do
+RSpec.describe GageWaterflowReport do
   describe '.to_csv' do
     it 'returns a csv file' do
-      river = create(:river)
-      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 1, 0), river: river)
-      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 2, 0), river: river)
+      gage = create(:gage)
+      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 1, 0), gage: gage)
+      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 2, 0), gage: gage)
 
-      report = described_class.new river: river, start_date: '2020-01-1', end_date: '2020-06-2'
+      report = described_class.new gage: gage, start_date: '2020-01-1', end_date: '2020-06-2'
       file = report.to_csv
 
       expect(File.extname(file.path)).to eq '.csv'
-      expect(file.path).to match(/river_#{river.id}/)
+      expect(file.path).to match(/gage_#{gage.id}/)
       expect(CSV.read(file.path)).to eq(
         [
           %w[fecha etapa descarga], # headers

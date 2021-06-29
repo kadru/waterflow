@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-module RiverScrapper
-  # Give it river record will save waterflow data of that river
+module GageScrapper
+  # Give it gage record will save waterflow data of that gage
   class Main
-    def self.call(river)
-      new(river: river, remote_table: RemoteTable.new(river.url)).call
+    def self.call(gage)
+      new(gage: gage, remote_table: RemoteTable.new(gage.url)).call
     end
 
     delegate :rows, to: :remote_table, private: true
-    def initialize(river:, remote_table:)
-      @river = river
+    def initialize(gage:, remote_table:)
+      @gage = gage
       @remote_table = remote_table
     end
 
     def call
       rows.each do |wf|
-        waterflow = river.waterflows.create(
+        waterflow = gage.waterflows.create(
           captured_at: parse_date(wf.captured_at),
           stage: wf.stage,
           discharge: wf.discharge
@@ -26,7 +26,7 @@ module RiverScrapper
 
     private
 
-    attr_reader :remote_table, :river
+    attr_reader :remote_table, :gage
 
     def unique_error?(waterflow)
       waterflow.invalid? && waterflow.unique_error?(:captured_at)
@@ -42,7 +42,7 @@ module RiverScrapper
         date_integers[3],
         date_integers[4],
         0,
-        river.offset
+        gage.offset
       )
     end
   end

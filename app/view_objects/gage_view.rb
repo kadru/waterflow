@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# River view object
-class RiverView < SimpleDelegator
+# Gage view object
+class GageView < SimpleDelegator
   def offset
     sec = super
 

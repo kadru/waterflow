@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :waterflow do
-    river
+    gage
     stage { 1.0 }
     discharge { 2.0 }
     sequence(:captured_at) do |n|

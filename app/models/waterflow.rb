@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-# Stores waterflow data of rivers
+# Stores waterflow data of gages
 class Waterflow < ApplicationRecord
-  InvalidRiverError = Class.new(StandardError)
-  belongs_to :river
+  InvalidGageError = Class.new(StandardError)
+  belongs_to :gage
 
   validates :captured_at,
-            uniqueness: { scope: :river_id },
+            uniqueness: { scope: :gage_id },
             presence: true
-  validates :river,
+  validates :gage,
             presence: true
   validates :discharge,
             numericality: true
@@ -37,8 +37,8 @@ class Waterflow < ApplicationRecord
   private
 
   def offset
-    raise InvalidRiverError, 'must belongs to a valid river, river is nil' if river.nil?
+    raise InvalidGageError, 'must belongs to a valid gage, gage is nil' if gage.nil?
 
-    river.offset
+    gage.offset
   end
 end

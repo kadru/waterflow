@@ -5,15 +5,15 @@ class ReportForm
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  # river_id tests doesn't pass with the follow
-  # api: attribute :river_id, :integer
-  attr_accessor :river_id
+  # gage_id tests doesn't pass with the follow
+  # api: attribute :gage_id, :integer
+  attr_accessor :gage_id
   attribute :start_date, :date
   attribute :end_date, :date
 
-  validates_presence_of :start_date, :end_date, :river_id
-  validates_numericality_of :river_id, only_integer: true
-  validate :validate_start_date, :validate_end_date, :validate_river_id
+  validates_presence_of :start_date, :end_date, :gage_id
+  validates_numericality_of :gage_id, only_integer: true
+  validate :validate_start_date, :validate_end_date, :validate_gage_id
 
   private
 
@@ -41,13 +41,13 @@ class ReportForm
     )
   end
 
-  def validate_river_id
-    return if river_id.nil?
+  def validate_gage_id
+    return if gage_id.nil?
 
-    return if River.find_by(id: river_id)
+    return if Gage.find_by(id: gage_id)
 
     errors.add(
-      :river_id,
+      :gage_id,
       :required
     )
   end

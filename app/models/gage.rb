@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Stores river data
-class River < ApplicationRecord
+# Stores gage data
+class Gage < ApplicationRecord
   has_many :waterflows, dependent: :destroy
 
   validates :ibcw_id,
@@ -34,7 +34,7 @@ class River < ApplicationRecord
   end
 
   def as_view
-    RiverView.new(self)
+    GageView.new(self)
   end
 
   def offset_time

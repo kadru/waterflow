@@ -2,23 +2,23 @@
 
 require 'rails_helper'
 
-RSpec.describe RiverIndexComponent, type: :component do
-  it 'renders rivers table' do
-    rivers = create_list(:river, 2, offset: 3600)
-    pagy = Pagy.new count: rivers.size, page: 1
+RSpec.describe GageIndexComponent, type: :component do
+  it 'renders gages table' do
+    gages = create_list(:gage, 2, offset: 3600)
+    pagy = Pagy.new count: gages.size, page: 1
 
-    subject = RiverIndexComponent.new(rivers: rivers, pagy: pagy)
+    subject = GageIndexComponent.new(gages: gages, pagy: pagy)
     render_inline(subject)
 
     expect(rendered_component).to have_content('Nombre')
     expect(rendered_component).to have_content('Zona Horaria')
-    rivers.each do |river|
-      expect(rendered_component).to have_content(river.name)
+    gages.each do |gage|
+      expect(rendered_component).to have_content(gage.name)
       expect(rendered_component).to have_link(href: 'http://example.com')
       expect(rendered_component).to have_content('+01:00')
-      expect(rendered_component).to have_selector("#destroy-river-#{river.id}")
+      expect(rendered_component).to have_selector("#destroy-gage-#{gage.id}")
     end
 
-    expect(rendered_component).to have_link(href: new_river_path)
+    expect(rendered_component).to have_link(href: new_gage_path)
   end
 end

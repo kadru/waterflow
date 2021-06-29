@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe River, type: :model do
+RSpec.describe Gage, type: :model do
   describe 'associations' do
     it { is_expected.to have_many(:waterflows).dependent(:destroy) }
   end
 
   describe '.for_select' do
     it 'returns an array for select tag helper' do
-      create_list(:river, 2)
+      create_list(:gage, 2)
 
       expect(described_class.for_select).to match_array(
         [
@@ -34,19 +34,19 @@ RSpec.describe River, type: :model do
 
     context 'when valid URL is given' do
       it 'must be valid' do
-        river = build(:river, url: 'http://www.example.com')
+        gage = build(:gage, url: 'http://www.example.com')
 
-        expect(river).to be_valid
+        expect(gage).to be_valid
       end
     end
 
     context 'when invalid URL is given' do
       it 'must be invalid' do
-        river = build(:river, url: 'invalid url')
-        river_without_host = build(:river, url: '/get')
+        gage = build(:gage, url: 'invalid url')
+        gage_without_host = build(:gage, url: '/get')
 
-        expect(river).not_to be_valid
-        expect(river_without_host).not_to be_valid
+        expect(gage).not_to be_valid
+        expect(gage_without_host).not_to be_valid
       end
     end
   end
@@ -76,24 +76,24 @@ RSpec.describe River, type: :model do
 
   describe '#waterflows_captured_at_between' do
     it 'returns waterflows between given dates' do
-      river = create(:river)
+      gage = create(:gage)
       create(
         :waterflow,
         captured_at: Time.zone.local(2020, 6, 14, 1),
-        river: river
+        gage: gage
       )
       create(
         :waterflow,
         captured_at: Time.zone.local(2020, 6, 10, 1),
-        river: river
+        gage: gage
       )
       create(
         :waterflow,
         captured_at: Time.zone.local(2020, 6, 15),
-        river: river
+        gage: gage
       )
 
-      waterflows = river.waterflows_captured_at_between('2020-06-11', '2020-06-14')
+      waterflows = gage.waterflows_captured_at_between('2020-06-11', '2020-06-14')
 
       expect(waterflows).to all(
         have_attributes(captured_at: be < Time.zone.local(2020, 6, 15))
@@ -107,7 +107,7 @@ RSpec.describe River, type: :model do
 
   describe '#as_view' do
     it 'returns a view object' do
-      expect(subject.as_view).to be_instance_of(RiverView)
+      expect(subject.as_view).to be_instance_of(GageView)
     end
   end
 

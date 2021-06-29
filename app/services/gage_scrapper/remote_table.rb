@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module RiverScrapper
-  # Give it an river URL and it will parse it to waterflow data
+module GageScrapper
+  # Give it an gage URL and it will parse it to waterflow data
   class RemoteTable
     class HttpStatusError < StandardError; end
     class ConnectionError < StandardError; end

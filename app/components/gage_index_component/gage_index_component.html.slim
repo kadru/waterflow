@@ -6,20 +6,20 @@ table.highlight
       th
       th
   tbody
-    - rivers.map(&:as_view).each do |river|
-      tr.river-row
+    - gages.map(&:as_view).each do |gage|
+      tr.gage-row
         td
-          = link_to river.url, target: '_blank' do
-            = river.name
+          = link_to gage.url, target: '_blank' do
+            = gage.name
         td
-          = river.offset
+          = gage.offset
         td
-          = link_to edit_river_path(river) do
+          = link_to edit_gage_path(gage) do
             i.material-icons edit
         td
-          = link_to(river_path(river),
+          = link_to(gage_path(gage),
             method: :delete,
-            id: "destroy-river-#{river.id}",
+            id: "destroy-gage-#{gage.id}",
             data: { confirm: t('dialog.confirmation') }) do
             i.material-icons delete
 .row
@@ -27,7 +27,7 @@ table.highlight
     == pagy_materialize_nav(pagy)
 
 .fixed-action-btn
-  = link_to new_river_path,
+  = link_to new_gage_path,
     class: 'btn-floating btn-large tooltipped',
     data: { position: 'left', tooltip: 'agregar rio'} do
     i.large.material-icons add

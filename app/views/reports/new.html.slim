@@ -6,8 +6,8 @@ h3 Nuevo Reporte
 = form_with model: report_form, url: reports_path, local: true do |f|
   .row
     .input-field.col.s12.m12.l4
-      = f.select :river_id, rivers
-      = f.label :river_id, id: ''
+      = f.select :gage_id, gages
+      = f.label :gage_id, id: ''
     .input-field.col.s12.m6.l4
       = f.label :start_date
       = f.text_field :start_date, class: "datepicker"

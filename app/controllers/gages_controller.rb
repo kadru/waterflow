@@ -1,31 +1,31 @@
 # frozen_string_literal: true
 
-# River CRUD
-class RiversController < ApplicationController
+# Gage CRUD
+class GagesController < ApplicationController
   before_action :require_login
 
   def index
-    pagy, rivers = pagy(River.all.order(:id))
-    render(RiverIndexComponent.new(rivers: rivers, pagy: pagy))
+    pagy, gages = pagy(Gage.all.order(:id))
+    render(GageIndexComponent.new(gages: gages, pagy: pagy))
   end
 
   def new
     render(
       :new,
       locals: {
-        river: River.new
+        gage: Gage.new
       }
     )
   end
 
   def create
-    river = River.new(river_params)
-    if river.save
+    gage = Gage.new(gage_params)
+    if gage.save
       flash[:success] = I18n.t('flash.success.create')
-      redirect_to :rivers
+      redirect_to :gages
     else
       flash[:error] = I18n.t('flash.failure.create')
-      render(:new, locals: { river: river })
+      render(:new, locals: { gage: gage })
     end
   end
 
@@ -33,34 +33,34 @@ class RiversController < ApplicationController
     render(
       :edit,
       locals: {
-        river: River.find(params[:id])
+        gage: Gage.find(params[:id])
       }
     )
   end
 
   def update
-    river = River.find params[:id]
+    gage = Gage.find params[:id]
 
-    if river.update(river_params)
+    if gage.update(gage_params)
       flash[:success] = I18n.t('flash.success.update')
-      redirect_to :rivers
+      redirect_to :gages
     else
       flash[:error] = I18n.t('flash.failure.update')
-      render(:edit, locals: { river: river })
+      render(:edit, locals: { gage: gage })
     end
   end
 
   def destroy
-    river = River.find params[:id]
+    gage = Gage.find params[:id]
 
-    river.destroy
-    redirect_to :rivers
+    gage.destroy
+    redirect_to :gages
   end
 
   private
 
-  def river_params
-    params.require(:river).permit(
+  def gage_params
+    params.require(:gage).permit(
       :name,
       :ibcw_id,
       :url,

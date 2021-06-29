@@ -4,13 +4,13 @@ require 'rails_helper'
 
 RSpec.describe SpiderWorker do
   describe '.perform' do
-    it 'delegate the river scrap work to RiverScrapper' do
-      river = create(:river)
-      allow(RiverScrapper::Main).to receive(:call)
+    it 'delegate the gage scrap work to GageScrapper' do
+      gage = create(:gage)
+      allow(GageScrapper::Main).to receive(:call)
 
-      described_class.perform_async(river.ibcw_id)
+      described_class.perform_async(gage.ibcw_id)
 
-      expect(RiverScrapper::Main).to have_received(:call).with(river)
+      expect(GageScrapper::Main).to have_received(:call).with(gage)
     end
   end
 end

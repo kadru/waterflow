@@ -9,7 +9,7 @@ RSpec.describe StreamFlowReport do
 
   describe '.to_csv' do
     it 'returns a csv file' do
-      river_id = DB[:rivers].insert(
+      gage_id = DB[:gages].insert(
         name: 'conchos',
         ibcw_id: '5000',
         url: 'http://example.com',
@@ -23,7 +23,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 1,
             captured_at: Time.zone.local(2020, 1, 2, 23, 55),
-            river_id: river_id,
+            gage_id: gage_id,
             stage: 9.0,
             discharge: 3.0,
             created_at: Time.zone.now,
@@ -32,7 +32,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 2,
             captured_at: Time.zone.local(2020, 1, 1, 0, 0),
-            river_id: river_id,
+            gage_id: gage_id,
             stage: 1.0,
             discharge: 2.0,
             created_at: Time.zone.now,
@@ -41,7 +41,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 3,
             captured_at: Time.zone.local(2020, 1, 1, 2, 0),
-            river_id: river_id,
+            gage_id: gage_id,
             stage: 1.0,
             discharge: 2.0,
             created_at: Time.zone.now,
@@ -50,7 +50,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 4,
             captured_at: Time.zone.local(2020, 1, 3, 0, 0),
-            river_id: river_id,
+            gage_id: gage_id,
             stage: 1.0,
             discharge: 2.0,
             created_at: Time.zone.now,
@@ -59,11 +59,11 @@ RSpec.describe StreamFlowReport do
         ]
       )
 
-      report = described_class.new river_id: river_id, start_date: '2020-01-1', end_date: '2020-01-2'
+      report = described_class.new gage_id: gage_id, start_date: '2020-01-1', end_date: '2020-01-2'
       file = report.to_csv
 
       expect(File.extname(file.path)).to eq '.csv'
-      expect(file.path).to match(/river_#{river_id}/)
+      expect(file.path).to match(/gage_#{gage_id}/)
       expect(CSV.read(file.path)).to eq(
         [
           %w[fecha etapa descarga], # headers

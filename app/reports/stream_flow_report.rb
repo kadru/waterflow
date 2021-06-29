@@ -2,20 +2,20 @@
 
 # Generate stream flow report
 class StreamFlowReport
-  attr_reader :river_id, :start_date, :end_date
+  attr_reader :gage_id, :start_date, :end_date
 
-  def initialize(river_id:, start_date:, end_date:)
-    @river_id = river_id
+  def initialize(gage_id:, start_date:, end_date:)
+    @gage_id = gage_id
     @start_date = start_date
     @end_date = end_date
   end
 
   def to_csv
-    file_path = "#{Rails.root}/tmp/river_#{river_id}_#{SecureRandom.uuid}.csv"
+    file_path = "#{Rails.root}/tmp/gage_#{gage_id}_#{SecureRandom.uuid}.csv"
 
     CSV.open(file_path, 'w+') do |csv|
       csv << headers
-      river_waterflows.stream.each do |wf|
+      gage_waterflows.stream.each do |wf|
         csv << rows(wf)
       end
     end
@@ -26,9 +26,9 @@ class StreamFlowReport
 
   def headers
     [
-      I18n.t('reports.river_waterflow.headers.captured_at'),
-      I18n.t('reports.river_waterflow.headers.stage'),
-      I18n.t('reports.river_waterflow.headers.discharge')
+      I18n.t('reports.gage_waterflow.headers.captured_at'),
+      I18n.t('reports.gage_waterflow.headers.stage'),
+      I18n.t('reports.gage_waterflow.headers.discharge')
     ]
   end
 
@@ -38,10 +38,10 @@ class StreamFlowReport
      waterflow[:discharge]]
   end
 
-  def river_waterflows
+  def gage_waterflows
     DB[:waterflows]
       .select(:captured_at, :stage, :discharge)
-      .where(river_id: river_id)
+      .where(gage_id: gage_id)
       .where(captured_at: start_date..end_date.to_date.end_of_day)
       .order(:captured_at)
   end

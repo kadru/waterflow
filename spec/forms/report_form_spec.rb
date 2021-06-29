@@ -31,35 +31,35 @@ RSpec.describe ReportForm, type: :model do
     end
   end
 
-  describe '#river_id' do
-    it { is_expected.to validate_presence_of(:river_id) }
-    it { is_expected.to validate_numericality_of(:river_id).only_integer }
+  describe '#gage_id' do
+    it { is_expected.to validate_presence_of(:gage_id) }
+    it { is_expected.to validate_numericality_of(:gage_id).only_integer }
 
-    let(:river) { create(:river) }
+    let(:gage) { create(:gage) }
 
-    context 'when river not exists' do
+    context 'when gage not exists' do
       it 'is not valid' do
         report_form = described_class.new(
           start_date: Date.new(2020, 2, 1),
           end_date: Date.new(2020, 2, 2),
-          river_id: river.id + 1
+          gage_id: gage.id + 1
         )
 
         expect(report_form).not_to be_valid
-        expect(report_form.errors.details).to have_key(:river_id)
+        expect(report_form.errors.details).to have_key(:gage_id)
       end
     end
 
-    context 'when river exists' do
+    context 'when gage exists' do
       it 'it is valid' do
         report_form = described_class.new(
           start_date: Date.new(2020, 2, 1),
           end_date: Date.new(2020, 2, 2),
-          river_id: river.id
+          gage_id: gage.id
         )
 
         expect(report_form).to be_valid
-        expect(report_form.errors.details).to_not have_key(:river_id)
+        expect(report_form.errors.details).to_not have_key(:gage_id)
       end
     end
   end

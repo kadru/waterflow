@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe RiverReportWorker do
+RSpec.describe GageReportWorker do
   describe '.perform' do
     it 'delegate the generation and send of report to WaterflowApp procedure' do
-      allow(WaterflowApp).to receive(:send_river_report)
+      allow(WaterflowApp).to receive(:send_gage_report)
 
       described_class.perform_async(
         1,
@@ -14,8 +14,8 @@ RSpec.describe RiverReportWorker do
         'example@example.com'
       )
 
-      expect(WaterflowApp).to have_received(:send_river_report).with(
-        river_id: 1,
+      expect(WaterflowApp).to have_received(:send_gage_report).with(
+        gage_id: 1,
         start_date: '17/12/2021',
         end_date: '20/12/2021',
         email: 'example@example.com'

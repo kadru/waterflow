@@ -1,4 +1,4 @@
-= form_with model: river, local: true, id: 'river-form' do |f|
+= form_with model: gage, local: true, id: 'gage-form' do |f|
   .row
     .col.s12
       .input-field
@@ -18,11 +18,11 @@
     .col.s6
       .input-field
         = f.label :offset_hours
-        = f.number_field :offset_hours, min: -12, max: 14, value: river.offset_time.hours
+        = f.number_field :offset_hours, min: -12, max: 14, value: gage.offset_time.hours
     .col.s6
       .input-field
         = f.label :offset_minutes
-        = f.number_field :offset_minutes, min: 0, max: 59, value: river.offset_time.minutes
+        = f.number_field :offset_minutes, min: 0, max: 59, value: gage.offset_time.minutes
 
   .row
     .col.s12

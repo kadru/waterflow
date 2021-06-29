@@ -20,12 +20,12 @@ RSpec.describe ReportMailer, type: :mailer do
     ENV.delete 'DEFAULT_SENDER_EMAIL'
   end
 
-  describe '.river_report' do
+  describe '.gage_report' do
     let(:mail) do
-      river = create(:river, name: 'conchos')
+      gage = create(:gage, name: 'conchos')
 
-      described_class.river_report(
-        river_id: river.id,
+      described_class.gage_report(
+        gage_id: gage.id,
         recipient: 'example@example.com',
         file_path: Tempfile.new('flujo_agua_rio_conchos').path
       )
@@ -34,8 +34,8 @@ RSpec.describe ReportMailer, type: :mailer do
     it 'render the headers' do
       expect(mail.subject).to eq(
         I18n.t(
-          'mailer.report_mailer.river_report.subject',
-          river_name: 'conchos'
+          'mailer.report_mailer.gage_report.subject',
+          gage_name: 'conchos'
         )
       )
       expect(mail.to).to eq(['example@example.com'])

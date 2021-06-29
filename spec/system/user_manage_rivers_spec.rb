@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe 'User manage rivers', type: :system, js: true do
+RSpec.describe 'User manage gages', type: :system, js: true do
   let(:user) { create(:user) }
-  # it_behaves_like 'authenticated', :rivers_path
-  # it_behaves_like 'authenticated', :new_river_path
+  # it_behaves_like 'authenticated', :gages_path
+  # it_behaves_like 'authenticated', :new_gage_path
 
-  feature 'User visits river index' do
-    scenario 'sees a list of rivers' do
-      create_list(:river, 2, offset: 3600)
+  feature 'User visits gage index' do
+    scenario 'sees a list of gages' do
+      create_list(:gage, 2, offset: 3600)
 
-      visit rivers_path(as: user)
-      rows = all('.river-row')
+      visit gages_path(as: user)
+      rows = all('.gage-row')
 
       rows.each do |row|
         expect(row).to have_content('conchos')
@@ -22,36 +22,36 @@ RSpec.describe 'User manage rivers', type: :system, js: true do
     end
   end
 
-  feature 'User creates a new river' do
-    scenario 'sees the created river on rivers index' do
-      visit new_river_path(as: user)
+  feature 'User creates a new gage' do
+    scenario 'sees the created gage on gages index' do
+      visit new_gage_path(as: user)
 
-      within '#river-form' do
-        fill_in 'river[ibcw_id]', with: '19293'
-        fill_in 'river[name]', with: 'bravo'
-        fill_in 'river[url]', with: 'https://ibwc.gov/wad/373000_a.txt'
-        fill_in 'river[offset_hours]', with: '1'
-        fill_in 'river[offset_minutes]', with: '0'
+      within '#gage-form' do
+        fill_in 'gage[ibcw_id]', with: '19293'
+        fill_in 'gage[name]', with: 'bravo'
+        fill_in 'gage[url]', with: 'https://ibwc.gov/wad/373000_a.txt'
+        fill_in 'gage[offset_hours]', with: '1'
+        fill_in 'gage[offset_minutes]', with: '0'
         click_on 'Guardar'
       end
 
-      row = first('.river-row')
+      row = first('.gage-row')
 
       expect(row).to have_content('bravo')
       expect(row).to have_link(href: 'https://ibwc.gov/wad/373000_a.txt')
       expect(row).to have_content('+01:00')
     end
 
-    context 'when tries to create a river with invalid data' do
+    context 'when tries to create a gage with invalid data' do
       scenario 'sees a error message' do
-        visit new_river_path(as: user)
+        visit new_gage_path(as: user)
 
-        within '#river-form' do
-          fill_in 'river[ibcw_id]', with: '19293'
-          fill_in 'river[name]', with: ''
-          fill_in 'river[url]', with: 'ibwc.gov/wad/373000_a.txt'
-          fill_in 'river[offset_hours]', with: '14'
-          fill_in 'river[offset_minutes]', with: '30'
+        within '#gage-form' do
+          fill_in 'gage[ibcw_id]', with: '19293'
+          fill_in 'gage[name]', with: ''
+          fill_in 'gage[url]', with: 'ibwc.gov/wad/373000_a.txt'
+          fill_in 'gage[offset_hours]', with: '14'
+          fill_in 'gage[offset_minutes]', with: '30'
           click_on 'Guardar'
         end
 
@@ -60,33 +60,33 @@ RSpec.describe 'User manage rivers', type: :system, js: true do
     end
   end
 
-  feature 'User updates a river' do
-    let!(:river) { create(:river, offset: 3600) }
+  feature 'User updates a gage' do
+    let!(:gage) { create(:gage, offset: 3600) }
 
-    scenario 'see the changes on river index' do
-      visit rivers_path(as: user)
+    scenario 'see the changes on gage index' do
+      visit gages_path(as: user)
 
-      click_link(href: "/rivers/#{river.id}/edit")
+      click_link(href: "/gages/#{gage.id}/edit")
 
-      within '#river-form' do
-        fill_in 'river[offset_hours]', with: '1'
-        fill_in 'river[offset_minutes]', with: '30'
+      within '#gage-form' do
+        fill_in 'gage[offset_hours]', with: '1'
+        fill_in 'gage[offset_minutes]', with: '30'
         click_on 'Guardar'
       end
 
-      row = first('.river-row')
+      row = first('.gage-row')
 
       expect(row).to have_content('+01:30')
     end
 
     context 'when tries to update with invalid data' do
       scenario 'sees an error message' do
-        visit rivers_path(as: user)
-        click_link(href: "/rivers/#{river.id}/edit")
-        within '#river-form' do
-          fill_in 'river[name]', with: ''
-          fill_in 'river[offset_hours]', with: '14'
-          fill_in 'river[offset_minutes]', with: '14'
+        visit gages_path(as: user)
+        click_link(href: "/gages/#{gage.id}/edit")
+        within '#gage-form' do
+          fill_in 'gage[name]', with: ''
+          fill_in 'gage[offset_hours]', with: '14'
+          fill_in 'gage[offset_minutes]', with: '14'
           click_on 'Guardar'
         end
 
@@ -95,16 +95,16 @@ RSpec.describe 'User manage rivers', type: :system, js: true do
     end
   end
 
-  feature 'User deletes a river' do
-    scenario 'the deleted river is not in the river index' do
-      river = create(:river)
+  feature 'User deletes a gage' do
+    scenario 'the deleted gage is not in the gage index' do
+      gage = create(:gage)
 
-      visit rivers_path(as: user)
+      visit gages_path(as: user)
 
-      click_link("destroy-river-#{river.id}")
+      click_link("destroy-gage-#{gage.id}")
       accept_alert
 
-      expect(page).to have_no_css('.river-row')
+      expect(page).to have_no_css('.gage-row')
     end
   end
 end

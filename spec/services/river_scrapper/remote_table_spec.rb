@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe RiverScrapper::RemoteTable do
+RSpec.describe GageScrapper::RemoteTable do
   before do
     stub_request(
       :get,
-      'https://ibwc.gov/river_id.txt'
+      'https://ibwc.gov/gage_id.txt'
     ).to_return(
       body: file_fixture(body),
       status: status
@@ -17,7 +17,7 @@ RSpec.describe RiverScrapper::RemoteTable do
     WebMock.allow_net_connect!
   end
 
-  let(:url) { 'https://ibwc.gov/river_id.txt' }
+  let(:url) { 'https://ibwc.gov/gage_id.txt' }
 
   describe '#success?' do
     context 'when request was succesful' do
@@ -117,7 +117,7 @@ RSpec.describe RiverScrapper::RemoteTable do
       before do
         stub_request(
           :get,
-          'https://ibwc.gov/river_id.txt'
+          'https://ibwc.gov/gage_id.txt'
         ).to_timeout
       end
 
@@ -130,13 +130,13 @@ RSpec.describe RiverScrapper::RemoteTable do
 
         expect do
           table.rows
-        end.to raise_error(RiverScrapper::RemoteTable::ConnectionError)
+        end.to raise_error(GageScrapper::RemoteTable::ConnectionError)
       end
     end
   end
 
   describe '#error' do
-    subject(:table) { described_class.new 'https://ibwc.gov/river_id.txt' }
+    subject(:table) { described_class.new 'https://ibwc.gov/gage_id.txt' }
 
     context 'when http errors happens' do
       let(:body) { 'error.txt' }

@@ -10,7 +10,7 @@ class SpiderWorker
   end
 
   def perform(ibcw_id)
-    river = River.find_by! ibcw_id: ibcw_id
-    RiverScrapper::Main.call(river)
+    gage = Gage.find_by! ibcw_id: ibcw_id
+    GageScrapper::Main.call(gage)
   end
 end

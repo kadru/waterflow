@@ -20,8 +20,8 @@ html
           i.material-icons menu
         ul#nav-mobile.right.hide-on-med-and-down
           - if signed_in?
-            li class="#{'active' if current_page?(rivers_path)}"
-              = link_to 'Rios', rivers_path
+            li class="#{'active' if current_page?(gages_path)}"
+              = link_to 'Rios', gages_path
             li class="#{'active' if current_page?(new_reports_path)}"
               = link_to 'Reportes', new_reports_path
           li
@@ -37,8 +37,8 @@ html
 
         ul#mobile-menu.sidenav
           -if signed_in?
-            li class="#{'active' if current_page?(rivers_path)}"
-              = link_to 'Rios', rivers_path
+            li class="#{'active' if current_page?(gages_path)}"
+              = link_to 'Rios', gages_path
             li class="#{'active' if current_page?(new_reports_path)}"
               = link_to 'Reportes', new_reports_path
           li
