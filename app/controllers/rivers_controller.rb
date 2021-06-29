@@ -6,13 +6,7 @@ class RiversController < ApplicationController
 
   def index
     pagy, rivers = pagy(River.all.order(:id))
-    render(
-      :index,
-      locals: {
-        rivers: rivers,
-        pagy: pagy
-      }
-    )
+    render(RiverIndexComponent.new(rivers: rivers, pagy: pagy))
   end
 
   def new

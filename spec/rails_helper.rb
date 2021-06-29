@@ -2,6 +2,7 @@
 
 require 'capybara/rspec'
 require 'sidekiq/testing'
+require 'view_component/test_helpers'
 require 'byebug'
 
 ENV['RAILS_ENV'] ||= 'test'
@@ -35,6 +36,10 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.include FactoryBot::Syntax::Methods
   config.include ActiveSupport::Testing::TimeHelpers
+  config.include ViewComponent::TestHelpers, type: :component
+  config.include Capybara::RSpecMatchers, type: :component
+  config.include Pagy::Backend, type: :component
+  config.include Rails.application.routes.url_helpers, type: :component
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

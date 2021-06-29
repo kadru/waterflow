@@ -20,6 +20,7 @@ gem 'sequel_pg', require: false
 gem 'sidekiq', '~> 6.0'
 gem 'slim', '~> 4.0.1'
 gem 'turbolinks', '~> 5'
+gem 'view_component', require: 'view_component/engine'
 gem 'webpacker', '~> 4.0'
 gem 'whenever', require: false
 
