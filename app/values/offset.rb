@@ -3,6 +3,7 @@
 # Class which represents offset with conversions
 class Offset
   attr_reader :offset
+
   def initialize(offset)
     @offset = offset || 0
   end

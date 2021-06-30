@@ -4,10 +4,12 @@ module GageScrapper
   # Give it an gage URL and it will parse it to waterflow data
   class RemoteTable
     class HttpStatusError < StandardError; end
+
     class ConnectionError < StandardError; end
     WaterflowRow = Struct.new(:captured_at, :stage, :discharge, :_captured_at, keyword_init: true)
 
     attr_reader :url
+
     def initialize(url)
       @url = url
     end
@@ -41,7 +43,7 @@ module GageScrapper
     end
 
     def row_lines
-      @row_lines ||= by_lines[4..-1]
+      @row_lines ||= by_lines[4..]
     end
 
     def response
@@ -51,7 +53,7 @@ module GageScrapper
     end
 
     def waterflow(line)
-      row_line = line.split(' ')
+      row_line = line.split
 
       WaterflowRow.new(
         captured_at: format_date(

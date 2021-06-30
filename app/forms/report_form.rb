@@ -8,6 +8,7 @@ class ReportForm
   # gage_id tests doesn't pass with the follow
   # api: attribute :gage_id, :integer
   attr_accessor :gage_id
+  
   attribute :start_date, :date
   attribute :end_date, :date
 
