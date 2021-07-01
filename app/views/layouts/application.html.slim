@@ -21,9 +21,9 @@ html
         ul#nav-mobile.right.hide-on-med-and-down
           - if signed_in?
             li class="#{'active' if current_page?(gages_path)}"
-              = link_to 'Rios', gages_path
+              = link_to t('gages_path'), gages_path
             li class="#{'active' if current_page?(new_reports_path)}"
-              = link_to 'Reportes', new_reports_path
+              = link_to t('new_reports_path'), new_reports_path
           li
             - if signed_out?
               = link_to t('layouts.application.sign_in'),
@@ -38,9 +38,9 @@ html
         ul#mobile-menu.sidenav
           -if signed_in?
             li class="#{'active' if current_page?(gages_path)}"
-              = link_to 'Rios', gages_path
+              = link_to t('gages_path'), gages_path
             li class="#{'active' if current_page?(new_reports_path)}"
-              = link_to 'Reportes', new_reports_path
+              = link_to t('new_reports_path'), new_reports_path
           li
             - if signed_in?
               = link_to t('layouts.application.sign_out'),

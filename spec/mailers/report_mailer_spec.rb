@@ -27,7 +27,7 @@ RSpec.describe ReportMailer, type: :mailer do
       described_class.gage_report(
         gage_id: gage.id,
         recipient: 'example@example.com',
-        file_path: Tempfile.new('flujo_agua_rio_conchos').path
+        file_path: Tempfile.new('flujo_agua_medidor_conchos').path
       )
     end
 
@@ -43,7 +43,7 @@ RSpec.describe ReportMailer, type: :mailer do
     end
 
     it 'render the body' do
-      expect(mail.body.encoded).to match(/Ya esta listo el reporte que solicitaste del rio/)
+      expect(mail.body.encoded).to match(/Ya esta listo el reporte que solicitaste del medidor/)
     end
 
     it 'sends an email' do
