@@ -116,4 +116,25 @@ RSpec.describe Gage, type: :model do
       expect(subject.offset_time).to be_instance_of(Offset)
     end
   end
+
+  describe '#last_waterflow_captured_at' do
+    context 'when has associated waterflows' do
+      subject do
+        gage = create(:gage)
+        create(:waterflow, gage: gage, captured_at: Time.new(2021, 6, 12, 13, 0))
+        create(:waterflow, gage: gage, captured_at: Time.new(2021, 6, 12, 13, 15))
+        gage
+      end
+
+      it 'returns the last captured waterflow date' do
+        expect(subject.last_waterflow_captured_at).to eq(Time.new(2021, 6, 12, 13, 15))
+      end
+    end
+
+    context 'when has not associated waterflows' do
+      it 'returns nil' do
+        expect(subject.last_waterflow_captured_at).to eq(nil)
+      end
+    end
+  end
 end

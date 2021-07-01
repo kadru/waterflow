@@ -41,6 +41,13 @@ class Gage < ApplicationRecord
     Offset.new(offset)
   end
 
+  def last_waterflow_captured_at
+    last_waterflow = waterflows.last
+    return if last_waterflow.nil?
+
+    last_waterflow.captured_at
+  end
+
   private
 
   def valid_url

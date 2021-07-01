@@ -3,6 +3,7 @@
 require 'capybara/rspec'
 require 'sidekiq/testing'
 require 'view_component/test_helpers'
+require 'helpers/translation_helpers'
 require 'byebug'
 
 ENV['RAILS_ENV'] ||= 'test'

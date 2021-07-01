@@ -1,8 +1,8 @@
 table.highlight
   thead
     tr
-      th Nombre
-      th Zona Horaria
+      th = t('gages.header.name')
+      th = t('gages.header.last_captured_at')
       th
       th
   tbody
@@ -12,7 +12,7 @@ table.highlight
           = link_to gage.url, target: '_blank' do
             = gage.name
         td
-          = gage.offset
+          = gage.last_waterflow_captured_at
         td
           = link_to edit_gage_path(gage) do
             i.material-icons edit
@@ -29,5 +29,5 @@ table.highlight
 .fixed-action-btn
   = link_to new_gage_path,
     class: 'btn-floating btn-large tooltipped',
-    data: { position: 'left', tooltip: 'agregar medidor'} do
+    data: { position: 'left', tooltip: t('gages.add_gage')} do
     i.large.material-icons add

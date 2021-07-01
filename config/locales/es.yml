@@ -38,6 +38,9 @@ es:
               greater_than: 'no puede ser mayor que %{attribute}'
             end_date:
               smaller_than: 'no puede ser menor que %{attribute}'
+  view_object:
+    gage_view:
+      missing_last_captured_at: no tiene lecturas
   dialog:
     confirmation: ¿Está seguro de realizar esta acción?
   flash:
@@ -463,3 +466,8 @@ es:
       title: Registrarse
   gages_path: Medidores
   new_reports_path: Nuevo reporte
+  gages:
+    header:
+      name: Nombre
+      last_captured_at: Última lectura
+    add_gage: agregar medidor
