@@ -45,6 +45,7 @@ html
             - if signed_in?
               = link_to t('layouts.application.sign_out'),
                 sign_out_path,
+                method: :delete,
                 class: 'waves-effect waves-light btn'
             - else
               = link_to t('layouts.application.sign_in'),
