@@ -2,7 +2,7 @@ es:
   mailer:
     report_mailer:
       gage_report:
-        subject: 'Reporte flujo de agua del rio %{gage_name}'
+        subject: 'Reporte flujo de agua del medidor %{gage_name}'
   reports:
     gage_waterflow:
       headers:
@@ -29,7 +29,7 @@ es:
       report_form:
         start_date: 'fecha inicial'
         end_date: 'fecha final'
-        gage_id: 'rio'
+        gage_id: 'medidor'
     errors:
       models:
         report_form:
@@ -461,3 +461,5 @@ es:
     new:
       sign_in: Entrar
       title: Registrarse
+  gages_path: Medidores
+  new_reports_path: Nuevo reporte
