@@ -8,10 +8,4 @@ class GageIndexComponent < ApplicationComponent
   end
 
   attr_reader :gages, :pagy
-
-  private
-
-  def privado
-    'privado'
-  end
 end
