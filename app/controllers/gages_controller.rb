@@ -5,7 +5,7 @@ class GagesController < ApplicationController
   before_action :require_login
 
   def index
-    pagy, gages = pagy(Gage.all.order(:id))
+    pagy, gages = pagy(Gage.all_with_waterflows)
     render(GageIndexComponent.new(gages: gages, pagy: pagy))
   end
 
