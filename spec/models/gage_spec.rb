@@ -20,6 +20,14 @@ RSpec.describe Gage, type: :model do
     end
   end
 
+  describe '.all_with_waterflows' do
+    it 'returns gages with waterflows included' do
+      gages = create_list(:gage_with_waterflows, 2)
+
+      expect(described_class.all_with_waterflows).to eq(gages)
+    end
+  end
+
   describe '#name' do
     it { is_expected.to validate_presence_of(:name) }
   end
