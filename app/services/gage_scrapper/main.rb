@@ -16,9 +16,10 @@ module GageScrapper
     def call
       rows.each do |wf|
         waterflow = gage.waterflows.create(
-          captured_at: parse_date(wf.captured_at),
+          captured_at: wf.captured_at(gage.offset),
           stage: wf.stage,
-          discharge: wf.discharge
+          discharge: wf.discharge,
+          precipitation: wf.precipitation
         )
         break if unique_error?(waterflow)
       end
@@ -30,20 +31,6 @@ module GageScrapper
 
     def unique_error?(waterflow)
       waterflow.invalid? && waterflow.unique_error?(:captured_at)
-    end
-
-    def parse_date(date)
-      date_integers = date.scan(/\d+/)
-
-      Time.new(
-        date_integers[2],
-        date_integers[0],
-        date_integers[1],
-        date_integers[3],
-        date_integers[4],
-        0,
-        gage.offset
-      )
     end
   end
 end

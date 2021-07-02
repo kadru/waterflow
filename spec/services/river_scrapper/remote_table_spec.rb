@@ -76,9 +76,10 @@ RSpec.describe GageScrapper::RemoteTable do
         table = described_class.new url
 
         expect(table.rows(1)).to have_attributes(
-          captured_at: '01/31/2020 22:45',
-          stage: '1.233',
-          discharge: '0.77'
+          captured_at: Time.new(2020, 1, 31, 22, 45),
+          stage: BigDecimal('1.233'),
+          discharge: BigDecimal('0.77'),
+          precipitation: nil
         )
       end
     end
@@ -99,14 +100,48 @@ RSpec.describe GageScrapper::RemoteTable do
         expect(table.rows).to match_array(
           [
             have_attributes(
-              captured_at: '01/31/2020 23:00',
-              stage: '1.234',
-              discharge: '0.78'
+              captured_at: Time.new(2020, 1, 31, 23, 0),
+              stage: BigDecimal('1.234'),
+              discharge: BigDecimal('0.78'),
+              precipitation: nil
             ),
             have_attributes(
-              captured_at: '01/31/2020 22:45',
-              stage: '1.233',
-              discharge: '0.77'
+              captured_at: Time.new(2020, 1, 31, 22, 45),
+              stage: BigDecimal('1.233'),
+              discharge: BigDecimal('0.77'),
+              precipitation: nil
+            )
+          ]
+        )
+      end
+    end
+
+    context 'when waterflow table has precipitation column' do
+      let(:status) { 200 }
+      let(:body) { 'wad_with_precipitation.txt' }
+
+      it 'all rows have precipitation attribute' do
+        table = described_class.new url
+
+        expect(table.rows).to match_array(
+          [
+            have_attributes(
+              captured_at: Time.new(2021, 7, 1, 11, 15),
+              stage: BigDecimal('2.077'),
+              discharge: BigDecimal('1.34'),
+              precipitation: BigDecimal('77.60')
+            ),
+            have_attributes(
+              captured_at: Time.new(2021, 7, 1, 11, 0),
+              stage: BigDecimal('2.077'),
+              discharge: BigDecimal('1.34'),
+              precipitation: BigDecimal('77.60')
+            ),
+            have_attributes(
+              captured_at: Time.new(2021, 7, 1, 10, 45),
+              stage: nil,
+              discharge: nil,
+              precipitation: nil
             )
           ]
         )

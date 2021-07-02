@@ -6,7 +6,6 @@ module GageScrapper
     class HttpStatusError < StandardError; end
 
     class ConnectionError < StandardError; end
-    WaterflowRow = Struct.new(:captured_at, :stage, :discharge, :_captured_at, keyword_init: true)
 
     attr_reader :url
 
@@ -61,7 +60,8 @@ module GageScrapper
           time: row_line[1]
         ),
         stage: row_line[2],
-        discharge: row_line[3]
+        discharge: row_line[3],
+        precipitation: row_line[4]
       )
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_031807) do
+ActiveRecord::Schema.define(version: 2021_07_01_205129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_031807) do
     t.bigint "gage_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "precipitation", precision: 9, scale: 2
     t.index ["captured_at"], name: "index_waterflows_on_captured_at"
     t.index ["gage_id", "captured_at"], name: "index_waterflows_on_gage_id_and_captured_at", unique: true
     t.index ["gage_id"], name: "index_waterflows_on_gage_id"

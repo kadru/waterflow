@@ -83,6 +83,36 @@ RSpec.describe GageScrapper::Main do
       end
     end
 
+    context 'when a waterflow data have precipitation' do
+      let(:body) { 'wad_with_precipitation.txt' }
+      let(:status) { 200 }
+
+      it 'downloads and save it to a gage' do
+        service.call
+
+        expect(gage.waterflows.first).to have_attributes(
+          captured_at: Time.new(2021, 7, 1, 11, 15, 0, '-06:00'),
+          stage: BigDecimal('0.2077e1'),
+          discharge: BigDecimal('1.34e0'),
+          precipitation: BigDecimal('77.60')
+        )
+
+        expect(gage.waterflows.second).to have_attributes(
+          captured_at: Time.new(2021, 7, 1, 11, 0, 0, '-06:00'),
+          stage: BigDecimal('0.2077e1'),
+          discharge: BigDecimal('1.34e0'),
+          precipitation: BigDecimal('77.60')
+        )
+
+        expect(gage.waterflows.last).to have_attributes(
+          captured_at: Time.new(2021, 7, 1, 10, 45, 0, '-06:00'),
+          stage: nil,
+          discharge: nil,
+          precipitation: nil
+        )
+      end
+    end
+
     context 'when an http error happens' do
       let(:body) { 'wad.txt' }
       let(:status) { 500 }
