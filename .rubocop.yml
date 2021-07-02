@@ -11,7 +11,7 @@ AllCops:
     - 'vendor/**/*'
     - '.git/**/*'
     - 'db/**/*'
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 Metrics/BlockLength:
   Exclude:
