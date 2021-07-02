@@ -3,7 +3,6 @@
 # Spider worker
 class SpiderWorker
   include Sidekiq::Worker
-  sidekiq_options queue: :spider_queue
 
   def self.perform(ibcw_id)
     new.perform(ibcw_id)
