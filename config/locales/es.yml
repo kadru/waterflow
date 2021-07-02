@@ -471,3 +471,6 @@ es:
       name: Nombre
       last_captured_at: Última lectura
     add_gage: agregar medidor
+    delete: borrar medidor
+    link_to_ibcw: enlace a ibcw del medidor
+    edit_gage_path: modificar

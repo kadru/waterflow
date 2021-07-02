@@ -70,6 +70,6 @@ class GagesController < ApplicationController
   end
 
   def page_title
-    'Rios'
+    'Medidores'
   end
 end
