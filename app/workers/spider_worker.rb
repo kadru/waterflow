@@ -15,7 +15,7 @@ class SpiderWorker
     Bugsnag.notify(e) do |report|
       report.add_tab(:gage, { gage_ibcw_id: ibcw_id, gage_url: gage.url })
     end
-    exception.instance_eval { def skip_bugsnag = true }
+    e.instance_eval { def skip_bugsnag = true }
 
     raise e
   end
