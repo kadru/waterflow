@@ -52,6 +52,7 @@ es:
       create: No se pudo crear
       update: No se pudo actualizar
       report: No se pudo generar el reporte
+    unauthorized: Sin autorización
   date:
     abbr_day_names:
     - dom

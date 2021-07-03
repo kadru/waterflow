@@ -3,6 +3,7 @@
 # Gage CRUD
 class GagesController < ApplicationController
   before_action :require_login
+  before_action :require_admin, only: %i[new create edit update destroy]
 
   def index
     pagy, gages = pagy(Gage.all_with_waterflows)
@@ -71,5 +72,12 @@ class GagesController < ApplicationController
 
   def page_title
     'Medidores'
+  end
+
+  def require_admin
+    return if current_user.admin?
+
+    flash[:error] = I18n.t('flash.unauthorized')
+    redirect_to gages_path
   end
 end

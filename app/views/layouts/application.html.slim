@@ -55,8 +55,8 @@ html
     .container
       = yield
 
-  javascript:
-    document.addEventListener('DOMContentLoaded', function() {
+  javascript defer='':
+    document.addEventListener('turbolinks:load', function() {
       var flash = #{JSON.dump(flash.to_hash).html_safe};
 
       Object.keys(flash).forEach(function(key){

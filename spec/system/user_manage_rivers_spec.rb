@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User manage gages', type: :system, js: true do
-  let(:user) { create(:user) }
+  let(:user) { create(:admin) }
 
   feature 'User visits gage index' do
     scenario 'sees a list of gages' do
@@ -61,6 +61,15 @@ RSpec.describe 'User manage gages', type: :system, js: true do
         expect(page).to have_content(I18n.t('flash.failure.create'))
       end
     end
+
+    context 'when user is not admin' do
+      scenario 'see a unauthorized error message' do
+        user = create(:user, admin: false)
+        visit new_gage_path(as: user)
+
+        expect(page).to have_content(translate!('flash.unauthorized'))
+      end
+    end
   end
 
   feature 'User updates a gage' do
@@ -97,6 +106,16 @@ RSpec.describe 'User manage gages', type: :system, js: true do
         expect(page).to have_content(I18n.t('flash.failure.update'))
       end
     end
+
+    context 'when user is not admin' do
+      scenario 'see a unauthorized error message' do
+        user = create(:user, admin: false)
+        visit gages_path(as: user)
+        click_link(href: "/gages/#{gage.id}/edit")
+
+        expect(page).to have_content(translate!('flash.unauthorized'))
+      end
+    end
   end
 
   feature 'User deletes a gage' do
@@ -109,6 +128,20 @@ RSpec.describe 'User manage gages', type: :system, js: true do
       accept_alert
 
       expect(page).to have_no_css('.gage-row')
+    end
+
+    context 'when user is not admin' do
+      scenario 'see a unauthorized error message' do
+        user = create(:user, admin: false)
+        gage = create(:gage)
+
+        visit gages_path(as: user)
+
+        click_link("destroy-gage-#{gage.id}")
+        accept_alert
+
+        expect(page).to have_content(translate!('flash.unauthorized'))
+      end
     end
   end
 
