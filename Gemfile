@@ -19,12 +19,12 @@ gem 'sass-rails', '>= 6'
 gem 'sequel', require: false
 gem 'sequel_pg', require: false
 gem 'sidekiq', '~> 6.0'
+gem 'skylight'
 gem 'slim', '~> 4.0.1'
 gem 'turbolinks', '~> 5'
 gem 'view_component', require: 'view_component/engine'
 gem 'webpacker', '~> 4.0'
 gem 'whenever', require: false
-
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 4.0'
