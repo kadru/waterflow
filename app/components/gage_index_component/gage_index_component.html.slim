@@ -1,6 +1,7 @@
 table.highlight
   thead
     tr
+      th = t('gages.header.ibcw_id')
       th = t('gages.header.name')
       th = t('gages.header.last_captured_at')
       th
@@ -8,6 +9,8 @@ table.highlight
   tbody
     - gages.map(&:as_view).each do |gage|
       tr.gage-row
+        td
+          = gage.ibcw_id
         td
           = link_to edit_gage_path(gage),
             class: 'tooltipped',

@@ -468,6 +468,7 @@ es:
   new_reports_path: Nuevo reporte
   gages:
     header:
+      ibcw_id: Ibcw id
       name: Nombre
       last_captured_at: Última lectura
     add_gage: agregar medidor

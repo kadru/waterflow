@@ -17,7 +17,9 @@ RSpec.describe GageIndexComponent, type: :component do
 
     expect(rendered_component).to have_content(translate!('gages.header.name'))
     expect(rendered_component).to have_content(translate!('gages.header.last_captured_at'))
+    expect(rendered_component).to have_content(translate!('gages.header.ibcw_id'))
     gages_with_waterflows.each do |gage_w|
+      expect(rendered_component).to have_content(gage_w.ibcw_id)
       expect(rendered_component).to have_content(gage_w.name)
       expect(rendered_component).to have_link(href: %r{http://example.com})
       expect(rendered_component).to have_content('2021/06/12 13:15')
