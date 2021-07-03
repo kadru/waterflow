@@ -19,7 +19,7 @@ RSpec.describe GageIndexComponent, type: :component do
     expect(rendered_component).to have_content(translate!('gages.header.last_captured_at'))
     gages_with_waterflows.each do |gage_w|
       expect(rendered_component).to have_content(gage_w.name)
-      expect(rendered_component).to have_link(href: 'http://example.com')
+      expect(rendered_component).to have_link(href: %r{http://example.com})
       expect(rendered_component).to have_content('2021/06/12 13:15')
       expect(rendered_component).to have_selector("#destroy-gage-#{gage_w.id}")
     end

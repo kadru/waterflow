@@ -12,7 +12,8 @@ class Gage < ApplicationRecord
   validates :name,
             presence: true
   validates :url,
-            presence: true
+            presence: true,
+            uniqueness: true
   validates :offset,
             presence: true,
             inclusion: { in: -43_200..50_400 },

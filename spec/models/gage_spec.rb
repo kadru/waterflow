@@ -39,6 +39,7 @@ RSpec.describe Gage, type: :model do
 
   describe '#url' do
     it { is_expected.to validate_presence_of(:url) }
+    it { is_expected.to validate_uniqueness_of(:url) }
 
     context 'when valid URL is given' do
       it 'must be valid' do

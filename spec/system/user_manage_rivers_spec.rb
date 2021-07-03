@@ -16,7 +16,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
 
       rows.each do |row|
         expect(row).to have_content('conchos')
-        expect(row).to have_link(href: 'http://example.com')
+        expect(row).to have_link(href: %r{http://example.com/})
       end
 
       gages.each do |gage|

@@ -4,7 +4,10 @@ FactoryBot.define do
   factory :gage do
     name { 'conchos' }
     sequence(:ibcw_id)
-    url { 'http://example.com' }
+    sequence :url do |n|
+      "http://example.com/#{n}"
+    end
+
     offset { 0 }
 
     factory :gage_with_waterflows do
