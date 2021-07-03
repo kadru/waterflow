@@ -11,9 +11,14 @@ class Waterflow < ApplicationRecord
   validates :gage,
             presence: true
   validates :discharge,
-            numericality: true
+            numericality: true,
+            allow_nil: true
   validates :stage,
-            numericality: true
+            numericality: true,
+            allow_nil: true
+  validates :precipitation,
+            numericality: true,
+            allow_nil: true
 
   scope :captured_at_between, lambda { |start_date, end_date|
     where(

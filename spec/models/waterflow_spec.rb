@@ -36,13 +36,16 @@ RSpec.describe Waterflow, type: :model do
   end
 
   describe '#stage' do
-    it { is_expected.to validate_numericality_of(:stage) }
+    it { is_expected.to validate_numericality_of(:stage).allow_nil }
   end
 
   describe '#discharge' do
-    it { is_expected.to validate_numericality_of(:discharge) }
+    it { is_expected.to validate_numericality_of(:discharge).allow_nil }
   end
 
+  describe '#precipitation' do
+    it { is_expected.to validate_numericality_of(:precipitation).allow_nil }
+  end
   describe '#unique_error?' do
     let(:gage) { create(:gage) }
     let(:date) { Time.new(2020, 1, 1, 23, 0) }

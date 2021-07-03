@@ -25,13 +25,13 @@ RSpec.describe GageScrapper::Main do
       gage = create(:gage, url: 'https://ibwc.gov/gage_id.txt', offset: -6.hours.seconds)
       described_class.call(gage)
 
-      expect(gage.waterflows.first).to have_attributes(
+      expect(gage.waterflows.last).to have_attributes(
         captured_at: Time.new(2020, 1, 31, 23, 0, 0, '-06:00'),
         stage: BigDecimal('0.1234e1'),
         discharge: BigDecimal('0.78e0')
       )
 
-      expect(gage.waterflows.last).to have_attributes(
+      expect(gage.waterflows.first).to have_attributes(
         captured_at: Time.new(2020, 1, 31, 22, 45, 0, '-06:00'),
         stage: BigDecimal('0.1233e1'),
         discharge: BigDecimal('0.77e0')
@@ -54,13 +54,13 @@ RSpec.describe GageScrapper::Main do
     it 'downloads waterflow data and save it to a gage' do
       service.call
 
-      expect(gage.waterflows.first).to have_attributes(
+      expect(gage.waterflows.last).to have_attributes(
         captured_at: Time.new(2020, 1, 31, 23, 0, 0, '-06:00'),
         stage: BigDecimal('0.1234e1'),
         discharge: BigDecimal('0.78e0')
       )
 
-      expect(gage.waterflows.last).to have_attributes(
+      expect(gage.waterflows.first).to have_attributes(
         captured_at: Time.new(2020, 1, 31, 22, 45, 0, '-06:00'),
         stage: BigDecimal('0.1233e1'),
         discharge: BigDecimal('0.77e0')
@@ -90,7 +90,7 @@ RSpec.describe GageScrapper::Main do
       it 'downloads and save it to a gage' do
         service.call
 
-        expect(gage.waterflows.first).to have_attributes(
+        expect(gage.waterflows.last).to have_attributes(
           captured_at: Time.new(2021, 7, 1, 11, 15, 0, '-06:00'),
           stage: BigDecimal('0.2077e1'),
           discharge: BigDecimal('1.34e0'),
@@ -104,7 +104,7 @@ RSpec.describe GageScrapper::Main do
           precipitation: BigDecimal('77.60')
         )
 
-        expect(gage.waterflows.last).to have_attributes(
+        expect(gage.waterflows.first).to have_attributes(
           captured_at: Time.new(2021, 7, 1, 10, 45, 0, '-06:00'),
           stage: nil,
           discharge: nil,
