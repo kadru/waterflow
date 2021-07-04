@@ -148,6 +148,51 @@ RSpec.describe GageScrapper::RemoteTable do
       end
     end
 
+    context 'when a redirect occurrs' do
+      let(:url) { 'http://ibwc.gov/gage_id.txt' }
+
+      before do
+        redirection = 'https://ibwc.gov/gage_id.txt'
+
+        stub_request(
+          :get,
+          url
+        ).to_return(
+          status: 307, headers: { location: redirection }
+        )
+
+        stub_request(
+          :get,
+          redirection
+        ).to_return(
+          body: file_fixture(body),
+          status: status
+        )
+      end
+
+      it 'follows the new url' do
+        table = described_class.new url
+
+        expect(table.rows.size).to eq(2)
+        expect(table.rows).to match_array(
+          [
+            have_attributes(
+              captured_at: Time.new(2020, 1, 31, 23, 0),
+              stage: BigDecimal('1.234'),
+              discharge: BigDecimal('0.78'),
+              precipitation: nil
+            ),
+            have_attributes(
+              captured_at: Time.new(2020, 1, 31, 22, 45),
+              stage: BigDecimal('1.233'),
+              discharge: BigDecimal('0.77'),
+              precipitation: nil
+            )
+          ]
+        )
+      end
+    end
+
     context 'when a timeout error occurs' do
       before do
         stub_request(

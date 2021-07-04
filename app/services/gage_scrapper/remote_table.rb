@@ -46,7 +46,7 @@ module GageScrapper
     end
 
     def response
-      @response ||= HTTP.get(url)
+      @response ||= HTTP.follow.get(url)
     rescue HTTP::Error => e
       raise ConnectionError, e.message
     end
