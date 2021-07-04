@@ -7,3 +7,8 @@
 @import "colors.scss";
 @import "materialize-css/sass/materialize.scss";
 @import "helpers.scss";
+
+.turbolinks-progress-bar {
+  background-color: $turbolink-color;
+  height: 5px;
+}
