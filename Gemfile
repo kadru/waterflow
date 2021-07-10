@@ -10,6 +10,7 @@ gem 'bugsnag', '~> 6.21'
 gem 'clearance'
 gem 'csv'
 gem 'exception_notification'
+gem 'fx', github: 'kadru/fx', branch: 'support-for-ruby-3'
 gem 'http'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -25,6 +26,7 @@ gem 'turbolinks', '~> 5'
 gem 'view_component', require: 'view_component/engine'
 gem 'webpacker', '~> 4.0'
 gem 'whenever', require: false
+
 group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 4.0'

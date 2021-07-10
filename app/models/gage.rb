@@ -4,7 +4,9 @@
 class Gage < ApplicationRecord
   has_many :waterflows, -> { order(:captured_at) }, dependent: :destroy
 
-  scope :all_with_waterflows, -> { all.includes(:waterflows).order(:id) }
+  scope :all_with_waterflows, -> { includes(:last_waterflow).order(:id) }
+
+  belongs_to :last_waterflow, foreign_key: :last_waterflow_id, optional: true, class_name: 'Waterflow'
 
   validates :ibcw_id,
             presence: true,
@@ -45,7 +47,6 @@ class Gage < ApplicationRecord
   end
 
   def last_waterflow_captured_at
-    last_waterflow = waterflows.last
     return if last_waterflow.nil?
 
     last_waterflow.captured_at

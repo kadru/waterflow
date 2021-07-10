@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_03_030542) do
+ActiveRecord::Schema.define(version: 2021_07_08_034241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_07_03_030542) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "offset"
+    t.bigint "last_waterflow_id"
     t.index ["ibcw_id"], name: "index_gages_on_ibcw_id", unique: true
     t.index ["url"], name: "index_gages_on_url", unique: true
   end
@@ -51,4 +52,50 @@ ActiveRecord::Schema.define(version: 2021_07_03_030542) do
     t.index ["gage_id"], name: "index_waterflows_on_gage_id"
   end
 
+  create_function :add_last_waterflow_id_to_gage, sql_definition: <<-SQL
+      CREATE OR REPLACE FUNCTION public.add_last_waterflow_id_to_gage()
+       RETURNS trigger
+       LANGUAGE plpgsql
+      AS $function$
+      DECLARE
+        most_recent_waterflow record;
+      BEGIN
+        SELECT id, captured_at
+        INTO most_recent_waterflow
+        FROM waterflows
+        WHERE gage_id = NEW.gage_id
+        ORDER BY captured_at DESC
+        LIMIT 1;
+
+        IF FOUND THEN
+          RAISE NOTICE 'found captured_at';
+          IF NEW.captured_at > most_recent_waterflow.captured_at THEN
+            RAISE NOTICE 'new is greater than last_captured_at';
+            UPDATE gages
+            SET last_waterflow_id = NEW.id
+            WHERE id = NEW.gage_id;
+            RAISE NOTICE 'UPATED IN GREATER THAN';
+          ELSE
+            RAISE NOTICE 'new is not greater than las_captured_at';
+            UPDATE gages
+            SET last_waterflow_id = most_recent_waterflow.id
+            WHERE id = NEW.gage_id;
+            RAISE NOTICE 'UPATED IN NO GREATER THAN';
+          END IF;
+        ELSE
+          UPDATE gages
+          SET last_waterflow_id = NEW.id
+          WHERE id = NEW.gage_id;
+          RAISE NOTICE 'UPDATED IN NOT FOUND';
+        END IF;
+
+        RETURN NEW;
+      END;
+      $function$
+  SQL
+
+
+  create_trigger :add_last_waterflow_id_to_gage, sql_definition: <<-SQL
+      CREATE TRIGGER add_last_waterflow_id_to_gage AFTER INSERT ON public.waterflows FOR EACH ROW EXECUTE FUNCTION add_last_waterflow_id_to_gage()
+  SQL
 end

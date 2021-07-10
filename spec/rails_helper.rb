@@ -80,6 +80,11 @@ RSpec.configure do |config|
     driven_by :selenium, using: :headless_chrome
   end
 
+  # To debug active record quieries
+  # config.before :suite do
+  #   ActiveRecord::Base.logger = Logger.new(STDOUT) if defined?(ActiveRecord::Base)
+  # end
+
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!

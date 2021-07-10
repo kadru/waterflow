@@ -132,7 +132,7 @@ RSpec.describe Gage, type: :model do
         gage = create(:gage)
         create(:waterflow, gage: gage, captured_at: Time.new(2021, 6, 12, 13, 0))
         create(:waterflow, gage: gage, captured_at: Time.new(2021, 6, 12, 13, 15))
-        gage
+        gage.reload
       end
 
       it 'returns the last captured waterflow date' do
@@ -141,9 +141,21 @@ RSpec.describe Gage, type: :model do
     end
 
     context 'when has not associated waterflows' do
+      subject { described_class.new }
+
       it 'returns nil' do
         expect(subject.last_waterflow_captured_at).to eq(nil)
       end
+    end
+  end
+
+  describe '#last_waterflow' do
+    it 'returns the last waterflow' do
+      subject = create(:gage)
+      waterflow = subject.waterflows.create(captured_at: Time.zone.now, stage: 1, discharge: 1)
+      subject.reload
+
+      expect(subject.last_waterflow).to eq(waterflow)
     end
   end
 end

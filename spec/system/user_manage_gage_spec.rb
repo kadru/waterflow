@@ -11,6 +11,8 @@ RSpec.describe 'User manage gages', type: :system, js: true do
       gages.each_with_index do |gage, index|
         create(:waterflow, gage: gage, captured_at: Time.zone.local(2021, 6, 12, index, 15))
       end
+      gages.each(&:reload)
+
       visit gages_path(as: user)
       rows = all('.gage-row')
 
