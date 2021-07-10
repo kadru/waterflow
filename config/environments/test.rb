@@ -60,4 +60,12 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
   config.middleware.use Clearance::BackDoor
+
+  # Unlogged tables are faster but they aren't crash proof.
+  # Don't use in production.
+  config.to_prepare do
+    ActiveSupport.on_load(:active_record) do
+      ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.create_unlogged_tables = true
+    end
+  end
 end
