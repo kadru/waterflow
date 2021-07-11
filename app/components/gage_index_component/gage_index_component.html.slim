@@ -1,3 +1,13 @@
+= form_with url: gages_path, method: :get, class: 'col s12', local: true do |f|
+  .row
+    .col.s12.m11
+      .input-field
+        = f.label :search, t('gages.search')
+        = f.text_field :search, value: search
+    .col.s2.m1.input-field
+      = f.submit t('btns.search'), class: 'btn waves-effect waves-light' do 
+        i.material-icons.right send
+
 table.highlight
   thead
     tr

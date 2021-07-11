@@ -11,10 +11,13 @@ RSpec.describe GageIndexComponent, type: :component do
     gages_with_waterflows.each do |gage_w|
       create(:waterflow, gage: gage_w, captured_at: Time.new(2021, 6, 12, 13, 15, 0, 0))
     end
-    gages_with_waterflows.each &:reload
+    gages_with_waterflows.each(&:reload)
 
     subject = GageIndexComponent.new(gages: gages_with_waterflows, pagy: pagy)
     render_inline(subject)
+
+    expect(rendered_component).to have_content(translate!('gages.search'))
+    expect(rendered_component).to have_button(translate!('btns.search'))
 
     expect(rendered_component).to have_content(translate!('gages.header.name'))
     expect(rendered_component).to have_content(translate!('gages.header.last_captured_at'))

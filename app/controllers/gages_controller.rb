@@ -6,8 +6,11 @@ class GagesController < ApplicationController
   before_action :require_admin, only: %i[new create edit update destroy]
 
   def index
-    pagy, gages = pagy(Gage.all_with_waterflows)
-    render(GageIndexComponent.new(gages: gages, pagy: pagy))
+    gages = Gage.search_or_all_with_waterflows(params[:search])
+    flash.now[:warning] = t('flash.without_results') if gages.empty?
+    pagy, gages = pagy(gages)
+
+    render(GageIndexComponent.new(gages: gages, pagy: pagy, search: params[:search]))
   end
 
   def new

@@ -28,6 +28,74 @@ RSpec.describe Gage, type: :model do
     end
   end
 
+  describe '.search_or_all_with_waterflows' do
+    context 'when params search is a name' do
+      it 'returns gages names matches' do
+        create(:gage, name: 'Conchos')
+        create(:gage, name: 'Bravo')
+        create(:gage, name: 'rio conchos')
+
+        expect(described_class.search_or_all_with_waterflows('conchos')).to match_array(
+          [
+            have_attributes(name: 'Conchos'),
+            have_attributes(name: 'rio conchos')
+          ]
+        )
+      end
+
+      context 'when there are not matches' do
+        it 'returns a empty collection' do
+          create(:gage, name: 'Conchos')
+          create(:gage, name: 'Bravo')
+
+          expect(described_class.search_or_all_with_waterflows('not matches')).to be_empty
+        end
+      end
+    end
+
+    context 'when param search is a ibcw_id' do
+      it 'returns gages ibcw_id matches' do
+        create(:gage, ibcw_id: '850', name: 'Conchos')
+        create(:gage, ibcw_id: '230', name: 'Bravo')
+        create(:gage, ibcw_id: '231', name: 'rio conchos')
+
+        expect(described_class.search_or_all_with_waterflows('850')).to match_array(
+          [
+            have_attributes(ibcw_id: '850', name: 'Conchos')
+          ]
+        )
+      end
+    end
+
+    context 'when search param is blank' do
+      it 'returns all gages' do
+        create(:gage, name: 'Conchos')
+        create(:gage, name: 'Bravo')
+
+        expect(described_class.search_or_all_with_waterflows('')).to match_array(
+          [
+            have_attributes(name: 'Conchos'),
+            have_attributes(name: 'Bravo')
+          ]
+        )
+      end
+    end
+
+    context 'when search param is not given' do
+      it 'returns all gages' do
+        create(:gage, name: 'Conchos')
+        create(:gage, name: 'Bravo')
+
+        expect(described_class.search_or_all_with_waterflows).to match_array(
+          [
+            have_attributes(name: 'Conchos'),
+            have_attributes(name: 'Bravo')
+          ]
+        )
+      end
+    end
+  end
+
   describe '#name' do
     it { is_expected.to validate_presence_of(:name) }
   end

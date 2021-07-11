@@ -53,6 +53,7 @@ es:
       update: No se pudo actualizar
       report: No se pudo generar el reporte
     unauthorized: Sin autorización
+    without_results: Sin resultados
   date:
     abbr_day_names:
     - dom
@@ -468,6 +469,7 @@ es:
   gages_path: Medidores
   new_reports_path: Nuevo reporte
   gages:
+    search: Busqueda
     header:
       ibcw_id: Ibcw id
       name: Nombre
@@ -476,3 +478,5 @@ es:
     delete: borrar medidor
     link_to_ibcw: enlace a ibcw del medidor
     edit_gage_path: modificar
+  btns:
+    search: Buscar

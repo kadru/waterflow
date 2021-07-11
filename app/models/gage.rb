@@ -2,11 +2,22 @@
 
 # Stores gage data
 class Gage < ApplicationRecord
+  include PgSearch::Model
+
   has_many :waterflows, -> { order(:captured_at) }, dependent: :destroy
+  belongs_to :last_waterflow, foreign_key: :last_waterflow_id, optional: true, class_name: 'Waterflow'
 
   scope :all_with_waterflows, -> { includes(:last_waterflow).order(:id) }
 
-  belongs_to :last_waterflow, foreign_key: :last_waterflow_id, optional: true, class_name: 'Waterflow'
+  pg_search_scope :search, against: %i[name ibcw_id]
+
+  # @param search [String]
+  # @return [ActiveRecord::Relation]
+  def self.search_or_all_with_waterflows(search = nil)
+    return all_with_waterflows if search.blank?
+
+    search(search).all_with_waterflows
+  end
 
   validates :ibcw_id,
             presence: true,

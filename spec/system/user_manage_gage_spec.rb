@@ -147,6 +147,35 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
   end
 
+  feature 'Users search for a gage by name' do
+    scenario 'sees gages that matches the given name' do
+      create(:gage, name: 'Conchos')
+      create(:gage, name: 'Texas')
+
+      visit gages_path(as: user)
+
+      fill_in translate!('gages.search'), with: 'Conchos'
+      click_on translate!('btns.search')
+
+      expect(page).to have_content('Conchos')
+      expect(page).to_not have_content('Texas')
+    end
+
+    context 'when there is not matches' do
+      it 'sees a message of not results' do
+        create(:gage, name: 'Conchos')
+        create(:gage, name: 'Texas')
+
+        visit gages_path(as: user)
+
+        fill_in translate!('gages.search'), with: 'not matches'
+        click_on translate!('btns.search')
+
+        expect(page).to have_content(translate!('flash.without_results'))
+      end
+    end
+  end
+
   private
 
   def field_value(field)
