@@ -7,7 +7,7 @@ ruby '3.0.2'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bugsnag', '~> 6.21'
-gem 'clearance'
+gem 'clearance', '~> 2.4'
 gem 'csv'
 gem 'exception_notification'
 gem 'fx', github: 'kadru/fx', branch: 'support-for-ruby-3'
