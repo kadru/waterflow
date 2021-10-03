@@ -75,4 +75,5 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/waterflow_app_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          CI: true
         run: bundle exec rspec

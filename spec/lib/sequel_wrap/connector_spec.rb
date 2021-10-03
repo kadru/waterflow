@@ -11,9 +11,9 @@ RSpec.describe SequelWrap::Connector do
   describe '#connect' do
     context 'when DATABASE_URL env is set' do
       around do |example|
-        ENV['DATABASE_URL'] = 'postgresql:///postgres'
+        ENV['DATABASE_URL'] = 'postgresql:///postgres' unless ENV['CI']
         example.run
-        ENV.delete('DATABASE_URL')
+        ENV.delete('DATABASE_URL') unless ENV['CI']
       end
 
       subject do
