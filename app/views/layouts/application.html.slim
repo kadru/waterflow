@@ -10,6 +10,8 @@ html
     = stylesheet_link_tag 'application', media: 'all, projection', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons', media: nil
+    - if content_for?(:head)
+      = yield(:head)
     meta name='viewport' content='width=device-width, initial-scale=1.0'
     meta name='theme-color' content='#00b8d4'
   body
@@ -55,7 +57,7 @@ html
     .container
       = yield
 
-  javascript defer='':
+  javascript:
     document.addEventListener('turbolinks:load', function() {
       var flash = #{JSON.dump(flash.to_hash).html_safe};
 

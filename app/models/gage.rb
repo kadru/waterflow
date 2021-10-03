@@ -37,6 +37,14 @@ class Gage < ApplicationRecord
   validates :offset_minutes,
             allow_nil: true,
             numericality: { only_integer: true }
+  validates :latitude,
+            numericality: true,
+            allow_nil: true,
+            inclusion: { in: -90..90 }
+  validates :longitude,
+            numericality: true,
+            allow_nil: true,
+            inclusion: { in: -180..180 }
   validate :valid_url
 
   before_validation :set_offset

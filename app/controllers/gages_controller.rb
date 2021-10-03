@@ -26,7 +26,7 @@ class GagesController < ApplicationController
     gage = Gage.new(gage_params)
     if gage.save
       flash[:success] = I18n.t('flash.success.create')
-      redirect_to :gages
+      redirect_to edit_gage_path gage
     else
       flash[:error] = I18n.t('flash.failure.create')
       render(:new, locals: { gage: gage })
@@ -34,12 +34,7 @@ class GagesController < ApplicationController
   end
 
   def edit
-    render(
-      :edit,
-      locals: {
-        gage: Gage.find(params[:id])
-      }
-    )
+    render GageComponent.new(gage: Gage.find(params[:id]))
   end
 
   def update
@@ -47,7 +42,7 @@ class GagesController < ApplicationController
 
     if gage.update(gage_params)
       flash[:success] = I18n.t('flash.success.update')
-      redirect_to :gages
+      redirect_to edit_gage_path gage
     else
       flash[:error] = I18n.t('flash.failure.update')
       render(:edit, locals: { gage: gage })
@@ -69,7 +64,9 @@ class GagesController < ApplicationController
       :ibcw_id,
       :url,
       :offset_hours,
-      :offset_minutes
+      :offset_minutes,
+      :latitude,
+      :longitude
     )
   end
 

@@ -28,7 +28,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
   end
 
   feature 'User creates a new gage' do
-    scenario 'sees the created gage on gages index' do
+    scenario 'sees the created gage on edit page' do
       visit new_gage_path(as: user)
 
       within '#gage-form' do
@@ -40,11 +40,12 @@ RSpec.describe 'User manage gages', type: :system, js: true do
         click_on 'Guardar'
       end
 
-      row = first('.gage-row')
-
-      expect(row).to have_content('bravo')
-      expect(row).to have_link(href: 'https://ibwc.gov/wad/373000_a.txt')
-      expect(row).to have_content(translate!('view_object.gage_view.missing_last_captured_at'))
+      expect(page).to have_content(translate!('flash.success.create'))
+      expect(page).to have_field('gage[ibcw_id]', with: '19293')
+      expect(page).to have_field('gage[name]', with: 'bravo')
+      expect(page).to have_field('gage[url]', with: 'https://ibwc.gov/wad/373000_a.txt')
+      expect(page).to have_field('gage[offset_hours]', with: '1')
+      expect(page).to have_field('gage[offset_minutes]', with: '0')
     end
 
     context 'when tries to create a gage with invalid data' do
@@ -77,7 +78,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
   feature 'User updates a gage' do
     let!(:gage) { create(:gage, offset: 3600) }
 
-    scenario 'see the changes on gage index' do
+    scenario 'see the changes on gage edit page' do
       visit gages_path(as: user)
 
       click_link(href: "/gages/#{gage.id}/edit")
@@ -88,10 +89,8 @@ RSpec.describe 'User manage gages', type: :system, js: true do
         click_on 'Guardar'
       end
 
-      click_link(href: "/gages/#{gage.id}/edit")
-
-      expect(field_value('gage[offset_hours]')).to have_content('12')
-      expect(field_value('gage[offset_minutes]')).to have_content('30')
+      expect(page).to have_field('gage[offset_hours]', with: '12')
+      expect(page).to have_field('gage[offset_minutes]', with: '30')
     end
 
     context 'when tries to update with invalid data' do
@@ -174,11 +173,5 @@ RSpec.describe 'User manage gages', type: :system, js: true do
         expect(page).to have_content(translate!('flash.without_results'))
       end
     end
-  end
-
-  private
-
-  def field_value(field)
-    find_field(field).value
   end
 end

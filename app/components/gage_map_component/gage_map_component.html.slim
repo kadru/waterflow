@@ -1,0 +1,45 @@
+.js-gage-map[id="gage_map_#{gage.id}" 
+  data-latitude="#{gage.latitude}" 
+  data-longitude="#{gage.longitude}"
+  data-name="#{gage.name}"
+  data-title="#{t '.marker' }"
+  data-mapbox-token="#{ENV['MAPBOX_TOKEN']}"]
+
+= content_for(:head) do
+  = stylesheet_link_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css', media: :all,
+    integrity: 'sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==',
+    crossorigin: 'anonymous'
+  = javascript_include_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js',
+    integrity: 'sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==',
+    crossorigin: 'anonymous',
+    defer: ''
+
+javascript:
+  document.addEventListener('turbolinks:load', () => {
+    const gagesMaps = document.querySelectorAll('.js-gage-map');
+    gagesMaps.forEach(gageMap => {
+      const mapId = gageMap.getAttribute('id');
+      const name = gageMap.dataset.name;
+      const title = gageMap.dataset.title;
+      const coords = [gageMap.dataset.latitude, gageMap.dataset.longitude];
+      const popupText = `<h6>${title}</h6>
+                         <p>${name}</p>`;
+      const mapboxToken = gageMap.dataset.mapboxToken;
+      const mymap = L.map(mapId).setView(coords, 13);
+
+      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        maxZoom: 18,
+        attribution: `Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors,
+                      Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
+        id: 'mapbox/outdoors-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: mapboxToken
+       }).addTo(mymap);
+
+      L.marker(coords)
+       .addTo(mymap)
+       .bindPopup(popupText)
+       .openPopup();
+    });
+ });

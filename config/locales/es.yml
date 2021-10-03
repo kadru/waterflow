@@ -18,6 +18,8 @@ es:
         offset: deplazamiento de zona horaria
         offset_hours: desplaz. horas
         offset_minutes: desplaz. minutos
+        latitude: latitud
+        longitude: longitud
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'
@@ -196,6 +198,7 @@ es:
     select:
       prompt: Por favor seleccione
     submit:
+      simple: Guardar
       create: Crear %{model}
       submit: Guardar %{model}
       update: Actualizar %{model}
@@ -478,5 +481,8 @@ es:
     delete: borrar medidor
     link_to_ibcw: enlace a ibcw del medidor
     edit_gage_path: modificar
+  gage_component:
+    new: Nuevo
+    edit: Editando
   btns:
     search: Buscar

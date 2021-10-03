@@ -41,3 +41,5 @@ coverage
 /spec/examples.txt
 
 .env
+.env.test
+.env.development

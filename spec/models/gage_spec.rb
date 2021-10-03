@@ -151,6 +151,16 @@ RSpec.describe Gage, type: :model do
     it { is_expected.to validate_numericality_of(:offset_minutes).only_integer }
   end
 
+  describe '#latitude' do
+    it { is_expected.to validate_numericality_of(:latitude).allow_nil }
+    it { is_expected.to validate_inclusion_of(:latitude).in_range(-90..90) }
+  end
+
+  describe '#longitude' do
+    it { is_expected.to validate_numericality_of(:longitude).allow_nil }
+    it { is_expected.to validate_inclusion_of(:longitude).in_range(-180..180) }
+  end
+
   describe '#waterflows_captured_at_between' do
     it 'returns waterflows between given dates' do
       gage = create(:gage)

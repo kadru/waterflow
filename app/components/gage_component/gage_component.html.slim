@@ -1,0 +1,50 @@
+h3
+  - if gage.persisted?
+    = t('gage_component.edit')
+  - else
+    = t('gage_component.new')
+
+= form_with model: gage, local: true, id: 'gage-form' do |f|
+  .row
+    .col.s12
+      .input-field
+        = f.label :ibcw_id
+        = f.text_field :ibcw_id
+  .row
+    .col.s12
+      .input-field
+        = f.label :name
+        = f.text_field :name
+  .row
+    .col.s12
+      .input-field
+        = f.label :url
+        = f.text_field :url
+  .row
+    .col.s6
+      .input-field
+        = f.label :offset_hours
+        = f.number_field :offset_hours, min: -12, max: 14, value: gage.offset_time.hours
+    .col.s6
+      .input-field
+        = f.label :offset_minutes
+        = f.number_field :offset_minutes, min: 0, max: 59, value: gage.offset_time.minutes
+  .row
+    .col.s12
+      .input-field
+        = f.label :latitude
+        = f.number_field :latitude, step: "0.0001"
+  .row
+    .col.s12
+      .input-field
+        = f.label :longitude
+        = f.number_field :longitude, step: "0.0001"
+
+  .row
+    .col.s12
+      = f.button type: :submit, class: 'btn waves-effect waves-light' do
+        = t('helpers.submit.simple')
+        i.material-icons.right send
+
+- if gage.persisted?
+  = render(GageMapComponent.new(gage: gage))

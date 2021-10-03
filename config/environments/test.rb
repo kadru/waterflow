@@ -68,4 +68,6 @@ Rails.application.configure do
       ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.create_unlogged_tables = true
     end
   end
+  # We include components translation files, to easy testing.
+  config.i18n.load_path += Dir[Rails.root.join('app', 'components', '**', '*.yml')]
 end
