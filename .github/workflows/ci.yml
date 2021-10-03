@@ -63,7 +63,7 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/waterflow_app_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
