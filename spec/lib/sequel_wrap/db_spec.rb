@@ -13,9 +13,10 @@ RSpec.describe SequelWrap::Db do
 
   describe 'lazy connect' do
     around do |example|
+      database_url = ENV['DATABASE_URL']
       ENV['DATABASE_URL'] = 'invalid-url'
       example.run
-      ENV.delete('DATABASE_URL')
+      ENV['DATABASE_URL'] = database_url
     end
 
     it 'connects to db until the first method call' do
