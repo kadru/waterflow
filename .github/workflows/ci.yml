@@ -12,6 +12,7 @@ on:
     branches: [ master ]
 jobs:
   run-lint:
+    name: Linters
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -55,7 +56,9 @@ jobs:
         with:
           node-version: "12"
           cache: yarn
-        run: yarn install
+
+      - name: Install node modules  
+        run: yarn
 
       - name: Setup test database
         env:
