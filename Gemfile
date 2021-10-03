@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.2'
 
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'clearance', '~> 2.4'
+gem 'clearance', '~> 2.5'
 gem 'csv'
 gem 'exception_notification'
 gem 'fx', github: 'kadru/fx', branch: 'support-for-ruby-3'
