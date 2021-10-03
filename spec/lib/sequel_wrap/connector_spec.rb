@@ -3,7 +3,7 @@
 require 'logger'
 require 'sequel_wrap/connector'
 
-RSpec.describe SequelWrap::Connector do
+RSpec.describe SequelWrap::Connector, skip_ci: true do
   let(:logger) do
     Logger.new('/dev/null')
   end
