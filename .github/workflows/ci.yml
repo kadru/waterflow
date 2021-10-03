@@ -76,4 +76,4 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           CI: true
-        run: bundle exec rspec
+        run: bundle exec rspec --tag ~skip_ci

@@ -3,7 +3,7 @@
 require 'logger'
 require 'sequel_wrap/connector'
 
-RSpec.describe SequelWrap::Connector do
+RSpec.describe SequelWrap::Connector, skip_ci: true do
   let(:logger) do
     Logger.new('/dev/null')
   end
@@ -11,9 +11,9 @@ RSpec.describe SequelWrap::Connector do
   describe '#connect' do
     context 'when DATABASE_URL env is set' do
       around do |example|
-        ENV['DATABASE_URL'] = 'postgresql:///postgres' unless ENV['CI']
+        ENV['DATABASE_URL'] = 'postgresql:///postgres'
         example.run
-        ENV.delete('DATABASE_URL') unless ENV['CI']
+        ENV.delete('DATABASE_URL')
       end
 
       subject do
