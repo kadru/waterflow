@@ -22,10 +22,55 @@ jobs:
         with:
           bundler-cache: true
       # Add or Replace any other security checks here
-      - name: Run security checks
-        run: |
-          bin/bundler-audit --update
+      #- name: Run security checks
+      #  run: |
+      #    bin/bundler-audit --update
       # Add or Replace any other Linters here
       - name: Run linters
         run: |
           bin/rubocop --parallel
+  run-tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10ms
+          --health-timeout 500ms
+          --health-retries 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+          cache: 'yarn'
+        run: yarn install
+
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        run: |
+          bundle exec rails db:setup
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        run: bundle exec rspec
