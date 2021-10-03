@@ -9,6 +9,8 @@ FactoryBot.define do
     end
 
     offset { 0 }
+    latitude { 1.0 }
+    longitude { 1.0 }
 
     factory :gage_with_waterflows do
       transient do
