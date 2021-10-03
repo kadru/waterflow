@@ -12,10 +12,7 @@ class SpiderWorker
     gage = Gage.find_by! ibcw_id: ibcw_id
     GageScrapper::Main.call(gage)
   rescue StandardError => e
-    Bugsnag.notify(e) do |report|
-      report.add_tab(:gage, { gage_ibcw_id: ibcw_id, gage_url: gage.url })
-    end
-    e.instance_eval { def skip_bugsnag = true }
+    Honeybadger.notify(e, context: { gage_ibcw_id: ibcw_id, gage_url: gage.url })
 
     raise e
   end

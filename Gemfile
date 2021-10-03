@@ -6,11 +6,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.2'
 
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'bugsnag', '~> 6.21'
 gem 'clearance', '~> 2.4'
 gem 'csv'
 gem 'exception_notification'
 gem 'fx', github: 'kadru/fx', branch: 'support-for-ruby-3'
+gem 'honeybadger', '~> 4.0'
 gem 'http'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -27,7 +27,6 @@ gem 'turbolinks', '~> 5'
 gem 'view_component', require: 'view_component/engine'
 gem 'webpacker', '~> 4.0'
 gem 'whenever', require: false
-
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
