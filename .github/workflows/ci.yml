@@ -63,7 +63,7 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          PGHOST: localhost
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: |
@@ -72,7 +72,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PGHOST: localhost
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/waterflow_app_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         run: bundle exec rspec
