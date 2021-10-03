@@ -21,14 +21,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      # Add or Replace any other security checks here
-      #- name: Run security checks
-      #  run: |
-      #    bin/bundler-audit --update
-      # Add or Replace any other Linters here
+
       - name: Run linters
         run: |
           bin/rubocop --parallel
+
   run-tests:
     name: Tests
     runs-on: ubuntu-latest
@@ -43,6 +40,7 @@ jobs:
           --health-interval 10ms
           --health-timeout 500ms
           --health-retries 15
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -55,8 +53,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: "12.x"
-          cache: 'yarn'
+          node-version: "12"
+          cache: yarn
         run: yarn install
 
       - name: Setup test database
