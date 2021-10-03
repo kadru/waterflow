@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Ruby and install gems
-        uses: ruby/setup-ruby
+        uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       # Add or Replace any other security checks here
