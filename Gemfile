@@ -22,7 +22,7 @@ gem 'sequel', require: false
 gem 'sequel_pg', require: false
 gem 'sidekiq', '~> 6.0'
 gem 'skylight'
-gem 'slim', '~> 4.0.1'
+gem 'slim', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'view_component', require: 'view_component/engine'
 gem 'webpacker', '~> 5.0'
