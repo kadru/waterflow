@@ -57,7 +57,7 @@ html
     .container
       = yield
 
-  javascript:
+  javascript nonce="#{content_security_policy_nonce}":
     document.addEventListener('turbolinks:load', function() {
       var flash = #{JSON.dump(flash.to_hash).html_safe};
 

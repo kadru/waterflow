@@ -14,7 +14,7 @@
     crossorigin: 'anonymous',
     defer: ''
 
-javascript:
+javascript nonce="#{content_security_policy_nonce}":
   document.addEventListener('turbolinks:load', () => {
     const gagesMaps = document.querySelectorAll('.js-gage-map');
     gagesMaps.forEach(gageMap => {
