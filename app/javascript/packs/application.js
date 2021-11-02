@@ -6,6 +6,7 @@
 import Rails from '@rails/ujs';
 import Turbolinks from 'turbolinks';
 import M from 'materialize-css';
+import datePicker from 'materialize/datePicker';
 
 Turbolinks.start();
 Rails.start();
@@ -20,9 +21,9 @@ let sidenavs;
 let tooltips;
 
 document.addEventListener('turbolinks:load', () => {
-  M.Datepicker.init(document.querySelectorAll('.datepicker'));
-  M.FormSelect.init(document.querySelectorAll('select'));
+  datePicker.initialize();
   M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'));
+  M.FormSelect.init(document.querySelectorAll('select'));
   sidenavs = M.Sidenav.init(document.querySelectorAll('.sidenav'));
   tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'));
   
