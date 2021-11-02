@@ -20,7 +20,7 @@ gem 'rails', '~> 6.1.0'
 gem 'sass-rails', '>= 6'
 gem 'sequel', require: false
 gem 'sequel_pg', require: false
-gem 'sidekiq', '~> 6.0'
+gem 'sidekiq', '~> 6.2'
 gem 'skylight'
 gem 'slim', '~> 4.0'
 gem 'turbolinks', '~> 5'
