@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_02_202222) do
+ActiveRecord::Schema.define(version: 2021_11_02_205231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_11_02_202222) do
 
   create_table "waterflows", force: :cascade do |t|
     t.datetime "captured_at"
-    t.decimal "stage", precision: 7, scale: 3
+    t.decimal "stage"
     t.decimal "discharge", precision: 9, scale: 2
     t.bigint "gage_id"
     t.datetime "created_at", precision: 6, null: false
