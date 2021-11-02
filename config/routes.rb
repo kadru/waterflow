@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :gages, except: [:show]
   resource :reports, only: %i[new create]
+
+  post '/csp_violations', to: 'csp_violations#create'
 end
