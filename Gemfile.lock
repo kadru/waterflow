@@ -117,9 +117,6 @@ GEM
     email_validator (2.2.3)
       activemodel
     erubi (1.10.0)
-    exception_notification (4.4.3)
-      actionmailer (>= 4.0, < 7)
-      activesupport (>= 4.0, < 7)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.1.0)
@@ -345,7 +342,6 @@ DEPENDENCIES
   csv
   database_cleaner (~> 1.7.0)
   dotenv-rails
-  exception_notification
   factory_bot_rails
   fx!
   honeybadger (~> 4.0)
