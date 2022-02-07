@@ -19,7 +19,7 @@ gem 'rails', '~> 7.0'
 gem 'sass-rails', '>= 6'
 gem 'sequel', require: false
 gem 'sequel_pg', require: false
-gem 'sidekiq', '~> 6.2'
+gem 'sidekiq', '~> 6.4'
 gem 'skylight'
 gem 'slim', '~> 4.0'
 gem 'sprockets-rails', require: 'sprockets/railtie'
