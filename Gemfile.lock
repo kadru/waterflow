@@ -237,7 +237,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.5.1)
+    redis (4.6.0)
     regexp_parser (2.0.3)
     rexml (3.2.5)
     rspec-core (3.10.1)
@@ -291,7 +291,7 @@ GEM
       sequel (>= 4.38.0)
     shoulda-matchers (4.2.0)
       activesupport (>= 4.2.0)
-    sidekiq (6.2.1)
+    sidekiq (6.4.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -386,7 +386,7 @@ DEPENDENCIES
   sequel
   sequel_pg
   shoulda-matchers (~> 4.2.0)
-  sidekiq (~> 6.2)
+  sidekiq (~> 6.4)
   simplecov
   skylight
   slim (~> 4.0)
