@@ -5,15 +5,6 @@
   data-title="#{t '.marker' }"
   data-mapbox-token="#{ENV['MAPBOX_TOKEN']}"]
 
-= content_for(:head) do
-  = stylesheet_link_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css', media: :all,
-    integrity: 'sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==',
-    crossorigin: 'anonymous'
-  = javascript_include_tag 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js',
-    integrity: 'sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==',
-    crossorigin: 'anonymous',
-    defer: ''
-
 javascript nonce="#{content_security_policy_nonce}":
   document.addEventListener('turbolinks:load', () => {
     const gagesMaps = document.querySelectorAll('.js-gage-map');
