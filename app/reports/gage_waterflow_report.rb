@@ -33,7 +33,7 @@ class GageWaterflowReport
   end
 
   def rows(waterflow)
-    [waterflow.captured_at.to_s(:report), waterflow.stage, waterflow.discharge]
+    [waterflow.captured_at.to_formatted_s(:report), waterflow.stage, waterflow.discharge]
   end
 
   def gage_waterflows

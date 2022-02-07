@@ -22,7 +22,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
       end
 
       gages.each do |gage|
-        expect(page).to have_content(gage.last_waterflow_captured_at.to_s(:report))
+        expect(page).to have_content(gage.last_waterflow_captured_at.to_formatted_s(:report))
       end
     end
   end

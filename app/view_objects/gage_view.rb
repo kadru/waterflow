@@ -13,6 +13,6 @@ class GageView < SimpleDelegator
   def last_waterflow_captured_at
     captured_at = super
 
-    captured_at.nil? ? I18n.t('view_object.gage_view.missing_last_captured_at') : captured_at.to_s(:report)
+    captured_at.nil? ? I18n.t('view_object.gage_view.missing_last_captured_at') : captured_at.to_formatted_s(:report)
   end
 end
