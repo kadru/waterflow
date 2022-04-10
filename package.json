@@ -1,16 +1,26 @@
 {
-  "name": "waterlfow_app",
+  "name": "app",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "^7.0.0",
-    "@rails/activestorage": "^7.0.0",
+    "@rails/webpacker": "^6.0.0-rc.6",
     "@rails/ujs": "^7.0.0",
-    "@rails/webpacker": "5.4.3",
+    "@rails/actioncable": "^7.0.0",
+    "turbolinks": "^5.2.0",
     "materialize-css": "^1.0.0-rc.2",
-    "turbolinks": "^5.2.0"
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
   },
   "version": "0.1.0",
+  "babel": {
+    "presets": [
+      "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ]
+  },
+  "browserslist": [
+    "defaults"
+  ],
   "devDependencies": {
-    "webpack-dev-server": "^4.3.0"
+    "@webpack-cli/serve": "^1.6.1",
+    "webpack-dev-server": "^4.8.1"
   }
 }
