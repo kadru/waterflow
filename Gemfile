@@ -14,7 +14,7 @@ gem 'http'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pg_search'
-gem 'puma', '~> 5.5'
+gem 'puma', '~> 5.6'
 gem 'rails', '~> 7.0'
 gem 'sass-rails', '>= 6'
 gem 'sequel', require: false
