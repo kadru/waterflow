@@ -19,13 +19,13 @@ gem 'rails', '~> 7.0'
 gem 'sass-rails', '>= 6'
 gem 'sequel', require: false
 gem 'sequel_pg', require: false
+gem 'shakapacker', '6.0.0'
 gem 'sidekiq', '~> 6.4'
 gem 'skylight'
 gem 'slim', '~> 4.0'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'turbolinks', '~> 5'
 gem 'view_component', '~> 2.49'
-gem 'webpacker', '~> 6.0.0.rc.6'
 gem 'whenever', require: false
 
 group :development, :test do
