@@ -25,7 +25,7 @@ gem 'slim', '~> 4.0'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'turbolinks', '~> 5'
 gem 'view_component', '~> 2.48'
-gem 'webpacker', '~> 5.0'
+gem 'webpacker', '~> 6.0.0.rc.6'
 gem 'whenever', require: false
 
 group :development, :test do
