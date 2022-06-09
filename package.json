@@ -10,6 +10,7 @@
     "@rails/ujs": "^7.0.0",
     "babel-loader": "^8.2.4",
     "compression-webpack-plugin": "^9.2.0",
+    "dotenv-webpack": "^7.1.0",
     "materialize-css": "^1.0.0-rc.2",
     "shakapacker": "6.0.0",
     "terser-webpack-plugin": "^5.3.1",

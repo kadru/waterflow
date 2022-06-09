@@ -1,3 +1,10 @@
-const { webpackConfig } = require('shakapacker')
+const { webpackConfig, merge } = require('shakapacker');
+const Dotenv = require('dotenv-webpack');
 
-module.exports = webpackConfig
+const options = {
+  plugins: [
+    new Dotenv()
+  ]
+}
+
+module.exports = merge({}, webpackConfig, options)

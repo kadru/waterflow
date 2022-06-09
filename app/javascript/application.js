@@ -21,6 +21,8 @@ let sidenavs;
 let tooltips;
 
 document.addEventListener('turbolinks:load', () => {
+  console.log(`enviroment ${process.env.RAILS_ENV}`)
+
   datePicker.initialize();
   M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'));
   M.FormSelect.init(document.querySelectorAll('select'));
