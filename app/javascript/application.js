@@ -7,7 +7,9 @@ import Rails from '@rails/ujs';
 import Turbolinks from 'turbolinks';
 import M from 'materialize-css';
 import datePicker from 'materialize/datePicker';
+import * as Routes from 'routes.js.erb';
 
+window.Routes = Routes;
 Turbolinks.start();
 Rails.start();
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -21,7 +23,8 @@ let sidenavs;
 let tooltips;
 
 document.addEventListener('turbolinks:load', () => {
-  console.log(`enviroment ${process.env.RAILS_ENV}`)
+  console.log(`enviroment ${process.env.RAILS_ENV}`);
+  console.log(Routes.gages_path());
 
   datePicker.initialize();
   M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'));
