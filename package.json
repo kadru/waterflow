@@ -12,7 +12,7 @@
     "compression-webpack-plugin": "^9.2.0",
     "dotenv-webpack": "^7.1.0",
     "materialize-css": "^1.0.0-rc.2",
-    "shakapacker": "6.0.0",
+    "shakapacker": "^6.0.0",
     "terser-webpack-plugin": "^5.3.1",
     "turbolinks": "^5.2.0",
     "webpack": "^5.72.0",
