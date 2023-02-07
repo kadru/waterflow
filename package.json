@@ -2,6 +2,7 @@
   "name": "app",
   "private": true,
   "dependencies": {
+    "autoprefixer": "^10.4.13",
     "@babel/core": "^7.17.9",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -15,11 +16,13 @@
     "dotenv-webpack": "^7.1.0",
     "materialize-css": "^1.0.0-rc.2",
     "mini-css-extract-plugin": "^2.7.2",
+    "postcss-fail-on-warn": "^0.2.1",
     "postcss-loader": "^7.0.2",
     "postcss-import": "^15.1.0",
     "shakapacker": "^6.0.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
+    "tailwindcss": "^3.2.4",
     "turbolinks": "^5.2.0",
     "webpack": "^5.72.0",
     "webpack-assets-manifest": "^5.1.0",
@@ -33,10 +36,7 @@
   ],
   "devDependencies": {
     "@webpack-cli/serve": "^1.6.1",
-    "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
-    "postcss-fail-on-warn": "^0.2.1",
-    "tailwindcss": "^3.2.4",
     "webpack-dev-server": "^4.8.1"
   }
 }
