@@ -6,6 +6,7 @@ default: &default
   public_root_path: public
   public_output_path: packs
   cache_path: tmp/webpacker
+  extract_css: true
   webpack_compile_output: true
 
   # Additional paths webpack should look up modules
@@ -43,6 +44,7 @@ development:
     pretty: true
     headers:
       'Access-Control-Allow-Origin': '*'
+      'Cache-Control': 'no-store'
     static:
       watch:
         ignored: '**/node_modules/**'
