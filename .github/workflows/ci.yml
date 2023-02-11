@@ -65,7 +65,7 @@ jobs:
         with:
           path: |
             public/assets
-            tpm/assets
+            tmp/assets
           key: ${{ runner.os }}-sprockets-${{ hashFiles('public/assets/.sprockets-manifest*')}}
 
       - name: Cache shakapacker assets
