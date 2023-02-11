@@ -60,6 +60,25 @@ jobs:
       - name: Install node modules  
         run: yarn
 
+      - name: Cache sprockets assets
+        uses: actions/cache@v3
+        with:
+          path: |
+            public/assets
+            tpm/assets
+          key: ${{ runner.os }}-sprockets-${{ hashFiles('public/assets/.sprockets-manifest*')}}
+
+      - name: Cache shakapacker assets
+        uses: actions/cache@v3
+        with:
+          path: public/packs-test
+          key: ${{ runner.os }}-shakapacker-${{ hashFiles('public/packs-test/manifest.json')}}
+
+      - name: Precompile assets
+        env:
+          RAILS_ENV: test
+        run: bin/rails assets:precompile
+
       - name: Setup test database
         env:
           RAILS_ENV: test
