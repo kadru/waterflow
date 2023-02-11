@@ -20,7 +20,7 @@ Rails.start();
 let sidenavs;
 let tooltips;
 
-console.log("test");
+console.log("test 2");
 
 document.addEventListener('turbolinks:load', () => {
   console.log(`enviroment ${process.env.RAILS_ENV}`)
