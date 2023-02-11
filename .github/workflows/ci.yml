@@ -71,7 +71,9 @@ jobs:
       - name: Cache shakapacker assets
         uses: actions/cache@v3
         with:
-          path: public/packs-test
+          path: |
+            public/packs-test
+            tmp/webpacker
           key: ${{ runner.os }}-shakapacker-${{ hashFiles('app/javascript/**/*')}}
 
       - name: Precompile assets
