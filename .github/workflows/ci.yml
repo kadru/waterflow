@@ -66,13 +66,13 @@ jobs:
           path: |
             public/assets
             tmp/assets
-          key: ${{ runner.os }}-sprockets-${{ hashFiles('public/assets/.sprockets-manifest*')}}
+          key: ${{ runner.os }}-sprockets-${{ hashFiles('app/assets/**/*')}}
 
       - name: Cache shakapacker assets
         uses: actions/cache@v3
         with:
           path: public/packs-test
-          key: ${{ runner.os }}-shakapacker-${{ hashFiles('public/packs-test/manifest.json')}}
+          key: ${{ runner.os }}-shakapacker-${{ hashFiles('app/javascript/**/*')}}
 
       - name: Precompile assets
         env:
