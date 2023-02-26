@@ -31,7 +31,7 @@ gem 'whenever', require: false
 group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
-  gem 'rspec-rails', '~> 5'
+  gem 'rspec-rails', '~> 6'
 end
 
 group :development do
