@@ -9,7 +9,7 @@ RSpec.describe GageScrapper::WaterflowRow do
 
   describe '#captured_at' do
     it 'returns captured_at date' do
-      expect(subject.captured_at).to eq(Time.new(2021, 7, 1, 11, 15))
+      expect(subject.captured_at).to eq(Time.new(2021, 7, 1, 11, 15, 0, '-05:00'))
     end
 
     context 'when time zone is given' do

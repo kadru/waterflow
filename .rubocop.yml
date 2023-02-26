@@ -1,3 +1,5 @@
+require:
+  - rubocop-rails
 AllCops:
   Exclude:
     - 'spec/rails_helper.rb'
@@ -19,6 +21,8 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
+Rails/SkipsModelValidations:
+  Enabled: false
 Style/FormatStringToken:
   Enabled: false
 Metrics/MethodLength:

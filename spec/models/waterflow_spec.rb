@@ -48,7 +48,8 @@ RSpec.describe Waterflow, type: :model do
   end
   describe '#unique_error?' do
     let(:gage) { create(:gage) }
-    let(:date) { Time.new(2020, 1, 1, 23, 0) }
+    let(:date) { Time.zone.local(2020, 1, 1, 23, 0) }
+
     before do
       create(:waterflow, captured_at: date, gage:)
     end
@@ -106,7 +107,7 @@ RSpec.describe Waterflow, type: :model do
 
     context 'when has no gage' do
       it 'raises an error' do
-        waterflow = Waterflow.create captured_at: Time.new(2020, 3, 8, 2, 45, 0)
+        waterflow = Waterflow.create captured_at: Time.zone.local(2020, 3, 8, 2, 45, 0)
         expect do
           waterflow.local_captured_at
         end.to raise_error(Waterflow::InvalidGageError)

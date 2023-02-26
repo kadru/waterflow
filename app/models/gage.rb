@@ -4,8 +4,8 @@
 class Gage < ApplicationRecord
   include PgSearch::Model
 
-  has_many :waterflows, -> { order(:captured_at) }, dependent: :destroy
-  belongs_to :last_waterflow, foreign_key: :last_waterflow_id, optional: true, class_name: 'Waterflow'
+  has_many :waterflows, -> { order(:captured_at) }, inverse_of: :gage, dependent: :destroy
+  belongs_to :last_waterflow, optional: true, class_name: 'Waterflow'
 
   scope :all_with_waterflows, -> { includes(:last_waterflow).order(:id) }
 
