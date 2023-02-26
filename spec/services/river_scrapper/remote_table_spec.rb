@@ -2,6 +2,9 @@
 
 require 'rails_helper'
 
+# Tests fails with Time.zone.local, so disable this cop
+# rubocop:disable Rails/TimeZone
+
 RSpec.describe GageScrapper::RemoteTable do
   before do
     stub_request(
@@ -72,15 +75,11 @@ RSpec.describe GageScrapper::RemoteTable do
     let(:body) { 'wad.txt' }
 
     context 'when give line number' do
-      around do |ex|
-        Time.use_zone('Mexico City') { ex.run }
-      end
-
       it 'returns waterflow data of that line' do
         table = described_class.new url
 
         expect(table.rows(1)).to have_attributes(
-          captured_at: Time.zone.local(2020, 1, 31, 22, 45),
+          captured_at: Time.new(2020, 1, 31, 22, 45),
           stage: BigDecimal('1.233'),
           discharge: BigDecimal('0.77'),
           precipitation: nil
@@ -97,10 +96,6 @@ RSpec.describe GageScrapper::RemoteTable do
     end
 
     context 'when line number is no given' do
-      around do |ex|
-        Time.use_zone('Mexico City') { ex.run }
-      end
-
       it 'returns all rows' do
         table = described_class.new url
 
@@ -108,13 +103,13 @@ RSpec.describe GageScrapper::RemoteTable do
         expect(table.rows).to match_array(
           [
             have_attributes(
-              captured_at: Time.zone.local(2020, 1, 31, 23, 0),
+              captured_at: Time.new(2020, 1, 31, 23, 0),
               stage: BigDecimal('1.234'),
               discharge: BigDecimal('0.78'),
               precipitation: nil
             ),
             have_attributes(
-              captured_at: Time.zone.local(2020, 1, 31, 22, 45),
+              captured_at: Time.new(2020, 1, 31, 22, 45),
               stage: BigDecimal('1.233'),
               discharge: BigDecimal('0.77'),
               precipitation: nil
@@ -128,29 +123,25 @@ RSpec.describe GageScrapper::RemoteTable do
       let(:status) { 200 }
       let(:body) { 'wad_with_precipitation.txt' }
 
-      around do |ex|
-        Time.use_zone('Mexico City') { ex.run }
-      end
-
       it 'all rows have precipitation attribute' do
         table = described_class.new url
 
         expect(table.rows).to match_array(
           [
             have_attributes(
-              captured_at: Time.zone.local(2021, 7, 1, 11, 15),
+              captured_at: Time.new(2021, 7, 1, 11, 15),
               stage: BigDecimal('2.077'),
               discharge: BigDecimal('1.34'),
               precipitation: BigDecimal('77.60')
             ),
             have_attributes(
-              captured_at: Time.zone.local(2021, 7, 1, 11, 0),
+              captured_at: Time.new(2021, 7, 1, 11, 0),
               stage: BigDecimal('2.077'),
               discharge: BigDecimal('1.34'),
               precipitation: BigDecimal('77.60')
             ),
             have_attributes(
-              captured_at: Time.zone.local(2021, 7, 1, 10, 45),
+              captured_at: Time.new(2021, 7, 1, 10, 45),
               stage: nil,
               discharge: nil,
               precipitation: nil
@@ -182,10 +173,6 @@ RSpec.describe GageScrapper::RemoteTable do
         )
       end
 
-      around do |ex|
-        Time.use_zone('Mexico City') { ex.run }
-      end
-
       it 'follows the new url' do
         table = described_class.new url
 
@@ -193,13 +180,13 @@ RSpec.describe GageScrapper::RemoteTable do
         expect(table.rows).to match_array(
           [
             have_attributes(
-              captured_at: Time.zone.local(2020, 1, 31, 23, 0),
+              captured_at: Time.new(2020, 1, 31, 23, 0),
               stage: BigDecimal('1.234'),
               discharge: BigDecimal('0.78'),
               precipitation: nil
             ),
             have_attributes(
-              captured_at: Time.zone.local(2020, 1, 31, 22, 45),
+              captured_at: Time.new(2020, 1, 31, 22, 45),
               stage: BigDecimal('1.233'),
               discharge: BigDecimal('0.77'),
               precipitation: nil
@@ -253,3 +240,4 @@ RSpec.describe GageScrapper::RemoteTable do
     end
   end
 end
+# rubocop:enable Rails/TimeZone

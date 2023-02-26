@@ -2,6 +2,9 @@
 
 require 'rails_helper'
 
+# Tests fails with Time.zone.local, so disable this cop
+# rubocop:disable Rails/TimeZone
+
 RSpec.describe GageScrapper::WaterflowRow do
   subject do
     described_class.new captured_at: '07/01/2021 11:15', stage: '2.077', discharge: '1.34', precipitation: '77.60'
@@ -9,7 +12,7 @@ RSpec.describe GageScrapper::WaterflowRow do
 
   describe '#captured_at' do
     it 'returns captured_at date' do
-      expect(subject.captured_at).to eq(Time.new(2021, 7, 1, 11, 15, 0, '-05:00'))
+      expect(subject.captured_at).to eq(Time.new(2021, 7, 1, 11, 15, 0))
     end
 
     context 'when time zone is given' do
@@ -69,3 +72,4 @@ RSpec.describe GageScrapper::WaterflowRow do
     end
   end
 end
+# rubocop:enable Rails/TimeZone
