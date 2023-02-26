@@ -46,3 +46,24 @@ document.addEventListener('turbolinks:before-cache', () => {
     t.destroy();
   });
 });
+
+document.addEventListener("turbolinks:load", () => {
+  document.querySelectorAll("button.js-toggle").forEach((element) => {
+    element.addEventListener("click", () => {
+      let target = document.getElementById(element.dataset.target);
+      target.hidden ? target.hidden = false : target.hidden = true;
+    });
+  });
+});
+
+document.addEventListener("turbolinks:load", () => {
+  document.querySelectorAll("button.js-mobile-menu").forEach((element) => {
+    element.addEventListener("click", () => {
+      let hamburgerIcon = element.querySelector("#js-hamburger");
+      let crossIcon = element.querySelector("#js-cross");
+
+      hamburgerIcon.classList.toggle("hidden");
+      crossIcon.classList.toggle("hidden");
+    });
+  });
+});

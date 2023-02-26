@@ -1,0 +1,115 @@
+<nav class="bg-gray-800
+              sticky
+              z-2"> <!-- set z-index to 2 allows the mobile-menu to overlapping body content -->
+  <div class="mx-auto
+              max-w-7xl
+              px-2
+              sm:px-6
+              lg:px-8">
+    <div class="relative
+                flex
+                h-16
+                items-center
+                justify-between">
+      <div class="absolute
+                  inset-y-0
+                  left-0
+                  flex
+                  items-center
+                  sm:hidden">
+        <!-- Mobile menu button-->
+        <button type="button"
+                class="js-toggle
+                      js-mobile-menu
+                      inline-flex
+                      items-center
+                      justify-center
+                      rounded-md p-
+                      text-gray-40
+                      hover:bg-gray-70
+                    hover:text-white
+                      focus:outline-none
+                      focus:ring-2
+                      focus:ring-inse
+                    focus:ring-white"
+                data-target="mobile-menu" 
+                aria-controls="mobile-menu"
+                aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg  id="js-hamburger"
+                class="block h-6 w-6" 
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24" 
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+          <svg  id="js-cross"
+                class="hidden h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex
+                  flex-1
+                  items-center
+                  justify-center
+                  sm:items-stretch
+                  sm:justify-start">
+        <div class="flex
+                    flex-shrink-0
+                    items-center">
+          <%= render NavlinkComponent.new(text: "WAD", path: root_path) %>
+        </div>
+        <div class="hidden
+                    sm:ml-6
+                    sm:block">
+          <div class="flex
+                      space-x-4">
+            <% if signed_in? %>
+              <%= render NavlinkComponent.new(text: t("gages_path"), path: gages_path) %>
+              <%= render NavlinkComponent.new(text: t("new_reports_path"), path: new_reports_path) %>
+            <% end %>
+            <% if signed_out? %>
+              <%= render NavlinkComponent.new(text:  t("layouts.application.sign_in"), path: sign_in_path) %>
+            <% else %>
+              <%= render NavlinkComponent.new(
+                          text:  t("layouts.application.sign_out"),
+                          path: sign_out_path,
+                          method: :delete) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="bg-gray-800 " id="mobile-menu" hidden>
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <% if signed_in? %>
+        <%= render NavlinkMobileComponent.new(text: t("gages_path"), path: gages_path) %>
+        <%= render NavlinkMobileComponent.new(text: t("new_reports_path"), path: new_reports_path) %>
+      <% end %>
+      <% if signed_out? %>
+        <%= render NavlinkMobileComponent.new(text: t("layouts.application.sign_in"), path: sign_in_path) %>
+      <% else %>
+        <%= render NavlinkMobileComponent.new(text: t("layouts.application.sign_out"),
+                                              path: sign_out_path,
+                                              method: :delete)%>
+      <% end %>
+    </div>
+  </div>
+</nav>
