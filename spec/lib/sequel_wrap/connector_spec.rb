@@ -17,7 +17,7 @@ RSpec.describe SequelWrap::Connector, skip_ci: true do
       end
 
       subject do
-        described_class.new(env: 'test', logger: logger)
+        described_class.new(env: 'test', logger:)
       end
 
       it 'connects to DATABASE_URL database is pointing' do
@@ -32,7 +32,7 @@ RSpec.describe SequelWrap::Connector, skip_ci: true do
 
     context 'when a valid env is given' do
       subject do
-        described_class.new env: 'test', logger: logger
+        described_class.new env: 'test', logger:
       end
 
       it 'connects to the given env' do
@@ -47,7 +47,7 @@ RSpec.describe SequelWrap::Connector, skip_ci: true do
 
     context 'when a invalid env is given' do
       subject do
-        described_class.new env: 'non-enviroment', logger: logger
+        described_class.new env: 'non-enviroment', logger:
       end
 
       it 'raise an error' do

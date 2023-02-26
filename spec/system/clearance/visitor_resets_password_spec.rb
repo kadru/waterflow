@@ -63,7 +63,7 @@ RSpec.feature 'Visitor resets password', type: :system, js: true do
   def expect_mailer_to_have_delivery(recipient:, subject:, body:)
     expect(ActionMailer::Base.deliveries).not_to be_empty
 
-    message = deliveries_email?(recipient: recipient, subject: subject, body: body)
+    message = deliveries_email?(recipient:, subject:, body:)
 
     expect(message).to be
   end

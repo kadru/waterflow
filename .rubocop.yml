@@ -19,8 +19,6 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
-Style/HashSyntax:
-  EnforcedShorthandSyntax: never
 Style/FormatStringToken:
   Enabled: false
 Metrics/MethodLength:

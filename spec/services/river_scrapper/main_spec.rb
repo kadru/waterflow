@@ -9,7 +9,7 @@ RSpec.describe GageScrapper::Main do
       'https://ibwc.gov/gage_id.txt'
     ).to_return(
       body: file_fixture(body),
-      status: status
+      status:
     )
   end
 
@@ -48,7 +48,7 @@ RSpec.describe GageScrapper::Main do
     let(:status) { 200 }
 
     subject(:service) do
-      described_class.new gage: gage, remote_table: GageScrapper::RemoteTable.new(gage.url)
+      described_class.new gage:, remote_table: GageScrapper::RemoteTable.new(gage.url)
     end
 
     it 'downloads waterflow data and save it to a gage' do

@@ -4,7 +4,7 @@ module GageScrapper
   # Give it gage record will save waterflow data of that gage
   class Main
     def self.call(gage)
-      new(gage: gage, remote_table: RemoteTable.new(gage.url)).call
+      new(gage:, remote_table: RemoteTable.new(gage.url)).call
     end
 
     delegate :rows, to: :remote_table, private: true

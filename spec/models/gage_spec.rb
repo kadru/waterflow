@@ -167,17 +167,17 @@ RSpec.describe Gage, type: :model do
       create(
         :waterflow,
         captured_at: Time.zone.local(2020, 6, 14, 1),
-        gage: gage
+        gage:
       )
       create(
         :waterflow,
         captured_at: Time.zone.local(2020, 6, 10, 1),
-        gage: gage
+        gage:
       )
       create(
         :waterflow,
         captured_at: Time.zone.local(2020, 6, 15),
-        gage: gage
+        gage:
       )
 
       waterflows = gage.waterflows_captured_at_between('2020-06-11', '2020-06-14')
@@ -208,8 +208,8 @@ RSpec.describe Gage, type: :model do
     context 'when has associated waterflows' do
       subject do
         gage = create(:gage)
-        create(:waterflow, gage: gage, captured_at: Time.new(2021, 6, 12, 13, 0))
-        create(:waterflow, gage: gage, captured_at: Time.new(2021, 6, 12, 13, 15))
+        create(:waterflow, gage:, captured_at: Time.new(2021, 6, 12, 13, 0))
+        create(:waterflow, gage:, captured_at: Time.new(2021, 6, 12, 13, 15))
         gage.reload
       end
 

@@ -41,7 +41,7 @@ class StreamFlowReport
   def gage_waterflows
     DB[:waterflows]
       .select(:captured_at, :stage, :discharge)
-      .where(gage_id: gage_id)
+      .where(gage_id:)
       .where(captured_at: start_date..end_date.to_date.end_of_day)
       .order(:captured_at)
   end

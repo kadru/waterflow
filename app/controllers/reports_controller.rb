@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
     else
       flash.now[:error] = I18n.t('flash.failure.report')
     end
-    render :new, locals: { report_form: report_form, gages: Gage.for_select }
+    render :new, locals: { report_form:, gages: Gage.for_select }
   end
 
   private

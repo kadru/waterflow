@@ -23,7 +23,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 1,
             captured_at: Time.zone.local(2020, 1, 2, 23, 55),
-            gage_id: gage_id,
+            gage_id:,
             stage: 9.0,
             discharge: 3.0,
             created_at: Time.zone.now,
@@ -32,7 +32,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 2,
             captured_at: Time.zone.local(2020, 1, 1, 0, 0),
-            gage_id: gage_id,
+            gage_id:,
             stage: 1.0,
             discharge: 2.0,
             created_at: Time.zone.now,
@@ -41,7 +41,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 3,
             captured_at: Time.zone.local(2020, 1, 1, 2, 0),
-            gage_id: gage_id,
+            gage_id:,
             stage: 1.0,
             discharge: 2.0,
             created_at: Time.zone.now,
@@ -50,7 +50,7 @@ RSpec.describe StreamFlowReport do
           {
             id: 4,
             captured_at: Time.zone.local(2020, 1, 3, 0, 0),
-            gage_id: gage_id,
+            gage_id:,
             stage: 1.0,
             discharge: 2.0,
             created_at: Time.zone.now,
@@ -59,7 +59,7 @@ RSpec.describe StreamFlowReport do
         ]
       )
 
-      report = described_class.new gage_id: gage_id, start_date: '2020-01-1', end_date: '2020-01-2'
+      report = described_class.new gage_id:, start_date: '2020-01-1', end_date: '2020-01-2'
       file = report.to_csv
 
       expect(File.extname(file.path)).to eq '.csv'

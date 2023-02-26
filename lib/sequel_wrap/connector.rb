@@ -38,7 +38,7 @@ module SequelWrap
 
     def conn_params
       {
-        adapter: adapter,
+        adapter:,
         host: params['host'],
         database: params['database'],
         user: params['user'],
