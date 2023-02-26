@@ -170,6 +170,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
+    matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.17.0)
@@ -371,6 +372,7 @@ DEPENDENCIES
   http
   letter_opener_web
   listen (~> 3.3)
+  matrix (~> 0.4.2)
   pagy
   pg (>= 0.18, < 2.0)
   pg_search
@@ -397,7 +399,7 @@ DEPENDENCIES
   whenever
 
 RUBY VERSION
-   ruby 3.0.5p211
+   ruby 3.1.3p185
 
 BUNDLED WITH
    2.2.33
