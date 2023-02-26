@@ -18,7 +18,7 @@ FactoryBot.define do
       end
 
       after :create do |gage, evaluator|
-        create_list(:waterflow, evaluator.waterflows_count, gage: gage)
+        create_list(:waterflow, evaluator.waterflows_count, gage:)
       end
     end
   end

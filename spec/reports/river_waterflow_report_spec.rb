@@ -7,10 +7,10 @@ RSpec.describe GageWaterflowReport do
   describe '.to_csv' do
     it 'returns a csv file' do
       gage = create(:gage)
-      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 1, 0), gage: gage)
-      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 2, 0), gage: gage)
+      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 1, 0), gage:)
+      create(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 2, 0), gage:)
 
-      report = described_class.new gage: gage, start_date: '2020-01-1', end_date: '2020-06-2'
+      report = described_class.new gage:, start_date: '2020-01-1', end_date: '2020-06-2'
       file = report.to_csv
 
       expect(File.extname(file.path)).to eq '.csv'

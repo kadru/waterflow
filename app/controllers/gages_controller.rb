@@ -10,7 +10,7 @@ class GagesController < ApplicationController
     flash.now[:warning] = t('flash.without_results') if gages.empty?
     pagy, gages = pagy(gages)
 
-    render(GageIndexComponent.new(gages: gages, pagy: pagy, search: params[:search]))
+    render(GageIndexComponent.new(gages:, pagy:, search: params[:search]))
   end
 
   def new
@@ -29,7 +29,7 @@ class GagesController < ApplicationController
       redirect_to edit_gage_path gage
     else
       flash[:error] = I18n.t('flash.failure.create')
-      render(:new, locals: { gage: gage })
+      render(:new, locals: { gage: })
     end
   end
 
@@ -45,7 +45,7 @@ class GagesController < ApplicationController
       redirect_to edit_gage_path gage
     else
       flash[:error] = I18n.t('flash.failure.update')
-      render(:edit, locals: { gage: gage })
+      render(:edit, locals: { gage: })
     end
   end
 

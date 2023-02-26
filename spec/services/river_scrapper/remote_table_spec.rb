@@ -9,7 +9,7 @@ RSpec.describe GageScrapper::RemoteTable do
       'https://ibwc.gov/gage_id.txt'
     ).to_return(
       body: file_fixture(body),
-      status: status
+      status:
     )
   end
 
@@ -166,7 +166,7 @@ RSpec.describe GageScrapper::RemoteTable do
           redirection
         ).to_return(
           body: file_fixture(body),
-          status: status
+          status:
         )
       end
 

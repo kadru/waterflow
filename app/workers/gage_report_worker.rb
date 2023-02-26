@@ -6,10 +6,10 @@ class GageReportWorker
 
   def perform(gage_id, start_date, end_date, email)
     WaterflowApp.send_gage_report(
-      gage_id: gage_id,
-      start_date: start_date,
-      end_date: end_date,
-      email: email
+      gage_id:,
+      start_date:,
+      end_date:,
+      email:
     )
   end
 end

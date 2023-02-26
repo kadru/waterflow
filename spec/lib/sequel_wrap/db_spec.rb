@@ -8,7 +8,7 @@ RSpec.describe SequelWrap::Db do
   let(:logger) { Logger.new('/dev/null') }
 
   subject do
-    described_class.new env: 'test', logger: logger
+    described_class.new env: 'test', logger:
   end
 
   describe 'lazy connect' do
@@ -21,7 +21,7 @@ RSpec.describe SequelWrap::Db do
 
     it 'connects to db until the first method call' do
       expect do
-        described_class.new env: 'test', logger: logger
+        described_class.new env: 'test', logger:
       end.to_not raise_error
     end
   end

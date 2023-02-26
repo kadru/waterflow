@@ -50,12 +50,12 @@ RSpec.describe Waterflow, type: :model do
     let(:gage) { create(:gage) }
     let(:date) { Time.new(2020, 1, 1, 23, 0) }
     before do
-      create(:waterflow, captured_at: date, gage: gage)
+      create(:waterflow, captured_at: date, gage:)
     end
 
     context 'when a unique validation error happens with given attribute' do
       it 'returns true' do
-        subject = build(:waterflow, captured_at: date, gage: gage)
+        subject = build(:waterflow, captured_at: date, gage:)
         subject.valid?
 
         expect(subject.unique_error?(:captured_at)).to eq(true)
@@ -64,7 +64,7 @@ RSpec.describe Waterflow, type: :model do
 
     context 'when none validation error happens with given attribute' do
       it 'returns false' do
-        subject = build(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 23, 15), gage: gage)
+        subject = build(:waterflow, captured_at: Time.zone.local(2020, 1, 1, 23, 15), gage:)
         subject.valid?
 
         expect(subject.unique_error?(:captured_at)).to eq(false)
@@ -73,7 +73,7 @@ RSpec.describe Waterflow, type: :model do
 
     context 'when the given attribute doesnt exist in the model' do
       it 'returns false' do
-        subject = build(:waterflow, gage: gage)
+        subject = build(:waterflow, gage:)
         subject.valid?
 
         expect(subject.unique_error?(:no_existent_attr)).to eq(false)

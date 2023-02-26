@@ -13,7 +13,7 @@ RSpec.describe GageIndexComponent, type: :component do
     end
     gages_with_waterflows.each(&:reload)
 
-    subject = GageIndexComponent.new(gages: gages_with_waterflows, pagy: pagy)
+    subject = GageIndexComponent.new(gages: gages_with_waterflows, pagy:)
     render_inline(subject)
 
     expect(rendered_component).to have_content(translate!('gages.search'))
@@ -39,7 +39,7 @@ RSpec.describe GageIndexComponent, type: :component do
       create(:gage, offset: 3600)
       pagy = Pagy.new count: 1, page: 1
 
-      subject = GageIndexComponent.new(gages: Gage.all, pagy: pagy)
+      subject = GageIndexComponent.new(gages: Gage.all, pagy:)
       render_inline(subject)
 
       expect(rendered_component).to have_content(translate!('view_object.gage_view.missing_last_captured_at'))

@@ -9,7 +9,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     scenario 'sees a list of gages' do
       gages = create_list(:gage_with_waterflows, 2, offset: 3600)
       gages.each_with_index do |gage, index|
-        create(:waterflow, gage: gage, captured_at: Time.zone.local(2021, 6, 12, index, 15))
+        create(:waterflow, gage:, captured_at: Time.zone.local(2021, 6, 12, index, 15))
       end
       gages.each(&:reload)
 

@@ -17,7 +17,7 @@ module SequelWrap
     attr_reader :env, :logger
 
     def __getobj__
-      @__getobj__ ||= Connector.new(env: env, logger: logger).connect
+      @__getobj__ ||= Connector.new(env:, logger:).connect
     end
   end
 end

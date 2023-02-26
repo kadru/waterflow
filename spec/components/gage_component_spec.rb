@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe GageComponent, type: :component do
   let(:gage) { create(:gage) }
-  subject { described_class.new(gage: gage) }
+  subject { described_class.new(gage:) }
 
   before do
     render_inline(subject)
