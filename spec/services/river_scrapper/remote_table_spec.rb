@@ -2,6 +2,9 @@
 
 require 'rails_helper'
 
+# Tests fails with Time.zone.local, so disable this cop
+# rubocop:disable Rails/TimeZone
+
 RSpec.describe GageScrapper::RemoteTable do
   before do
     stub_request(
@@ -237,3 +240,4 @@ RSpec.describe GageScrapper::RemoteTable do
     end
   end
 end
+# rubocop:enable Rails/TimeZone

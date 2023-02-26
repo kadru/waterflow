@@ -25,7 +25,10 @@ RSpec.describe GageView do
 
   describe '#last_waterflow_captured_at' do
     it 'returns captured_at date formated with report' do
-      subject = described_class.new(instance_double(Gage, last_waterflow_captured_at: Time.new(2021, 6, 12, 13, 15)))
+      subject = described_class.new(instance_double(Gage,
+                                                    last_waterflow_captured_at: Time.new(
+                                                      2021, 6, 12, 13, 15, 0, '+01:00'
+                                                    )))
 
       expect(subject.last_waterflow_captured_at).to eq('2021/06/12 13:15')
     end

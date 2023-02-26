@@ -11,7 +11,7 @@ class StreamFlowReport
   end
 
   def to_csv
-    file_path = "#{Rails.root}/tmp/gage_#{gage_id}_#{SecureRandom.uuid}.csv"
+    file_path = Rails.root.join "/tmp/gage_#{gage_id}_#{SecureRandom.uuid}.csv"
 
     CSV.open(file_path, 'w+') do |csv|
       csv << headers

@@ -208,13 +208,13 @@ RSpec.describe Gage, type: :model do
     context 'when has associated waterflows' do
       subject do
         gage = create(:gage)
-        create(:waterflow, gage:, captured_at: Time.new(2021, 6, 12, 13, 0))
-        create(:waterflow, gage:, captured_at: Time.new(2021, 6, 12, 13, 15))
+        create(:waterflow, gage:, captured_at: Time.zone.local(2021, 6, 12, 13, 0))
+        create(:waterflow, gage:, captured_at: Time.zone.local(2021, 6, 12, 13, 15))
         gage.reload
       end
 
       it 'returns the last captured waterflow date' do
-        expect(subject.last_waterflow_captured_at).to eq(Time.new(2021, 6, 12, 13, 15))
+        expect(subject.last_waterflow_captured_at).to eq(Time.zone.local(2021, 6, 12, 13, 15))
       end
     end
 
