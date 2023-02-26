@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.5'
+ruby '3.1.3'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clearance', '~> 2.5'
@@ -11,6 +11,7 @@ gem 'csv'
 gem 'fx', github: 'kadru/fx', branch: 'support-for-ruby-3'
 gem 'honeybadger', '~> 4.0'
 gem 'http'
+gem 'matrix', '~> 0.4.2'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pg_search'
