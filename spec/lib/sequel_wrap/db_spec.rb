@@ -5,11 +5,11 @@ require 'logger'
 require 'byebug'
 
 RSpec.describe SequelWrap::Db do
-  let(:logger) { Logger.new('/dev/null') }
-
-  subject do
+  subject(:db) do
     described_class.new env: 'test', logger:
   end
+
+  let(:logger) { Logger.new('/dev/null') }
 
   describe 'lazy connect' do
     around do |example|
@@ -22,7 +22,7 @@ RSpec.describe SequelWrap::Db do
     it 'connects to db until the first method call' do
       expect do
         described_class.new env: 'test', logger:
-      end.to_not raise_error
+      end.not_to raise_error
     end
   end
 
@@ -30,7 +30,7 @@ RSpec.describe SequelWrap::Db do
   # there are more methods delegated but for convenience I will only test this
   describe '#[]' do
     it 'returns a dataset' do
-      expect(subject[:users]).to be_kind_of(Sequel::Postgres::Dataset)
+      expect(db[:users]).to be_kind_of(Sequel::Postgres::Dataset)
     end
   end
 end

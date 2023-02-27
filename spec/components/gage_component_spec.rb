@@ -3,11 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe GageComponent, type: :component do
+  subject(:gage_component) { described_class.new(gage:) }
+
   let(:gage) { create(:gage) }
-  subject { described_class.new(gage:) }
 
   before do
-    render_inline(subject)
+    render_inline(gage_component)
   end
 
   it 'render the gage form' do

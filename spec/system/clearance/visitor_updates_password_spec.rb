@@ -3,15 +3,15 @@
 require 'rails_helper'
 require 'support/system/clearance_helpers'
 
-RSpec.feature 'Visitor updates password', type: :system, js: true do
-  scenario 'with valid password' do
+RSpec.describe 'Visitor updates password', type: :system, js: true do
+  it 'with valid password' do
     user = user_with_reset_password
     update_password user, 'newpassword'
 
     expect_user_to_be_signed_in
   end
 
-  scenario 'signs in with new password' do
+  it 'signs in with new password' do
     user = user_with_reset_password
     update_password user, 'newpassword'
     sign_out
@@ -20,7 +20,7 @@ RSpec.feature 'Visitor updates password', type: :system, js: true do
     expect_user_to_be_signed_in
   end
 
-  scenario 'tries with a blank password' do
+  it 'tries with a blank password' do
     user = user_with_reset_password
     visit_password_reset_page_for user
     change_password_to ''

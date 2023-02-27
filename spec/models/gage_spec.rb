@@ -193,20 +193,24 @@ RSpec.describe Gage, type: :model do
   end
 
   describe '#as_view' do
+    subject(:gage) { described_class.new }
+
     it 'returns a view object' do
-      expect(subject.as_view).to be_instance_of(GageView)
+      expect(gage.as_view).to be_instance_of(GageView)
     end
   end
 
   describe '#offset_time' do
+    subject(:gage) { described_class.new }
+
     it 'returns an offset object' do
-      expect(subject.offset_time).to be_instance_of(Offset)
+      expect(gage.offset_time).to be_instance_of(Offset)
     end
   end
 
   describe '#last_waterflow_captured_at' do
     context 'when has associated waterflows' do
-      subject do
+      subject(:gage) do
         gage = create(:gage)
         create(:waterflow, gage:, captured_at: Time.zone.local(2021, 6, 12, 13, 0))
         create(:waterflow, gage:, captured_at: Time.zone.local(2021, 6, 12, 13, 15))
@@ -214,15 +218,15 @@ RSpec.describe Gage, type: :model do
       end
 
       it 'returns the last captured waterflow date' do
-        expect(subject.last_waterflow_captured_at).to eq(Time.zone.local(2021, 6, 12, 13, 15))
+        expect(gage.last_waterflow_captured_at).to eq(Time.zone.local(2021, 6, 12, 13, 15))
       end
     end
 
     context 'when has not associated waterflows' do
-      subject { described_class.new }
+      subject(:gage) { described_class.new }
 
       it 'returns nil' do
-        expect(subject.last_waterflow_captured_at).to eq(nil)
+        expect(gage.last_waterflow_captured_at).to eq(nil)
       end
     end
   end

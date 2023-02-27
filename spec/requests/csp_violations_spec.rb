@@ -22,7 +22,7 @@ RSpec.describe 'CspViolations', type: :request do
         }
       }
 
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(:no_content)
     end
   end
 end

@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'support/system/clearance_helpers'
 
-RSpec.feature 'Visitor resets password', type: :system, js: true do
+RSpec.describe 'Visitor resets password', type: :system, js: true do
   before do
     ActionMailer::Base.deliveries.clear
     # BUG
@@ -23,22 +23,22 @@ RSpec.feature 'Visitor resets password', type: :system, js: true do
   #   ActiveJob::Base.queue_adapter = original_adapter
   # end
 
-  scenario 'by navigating to the page' do
+  it 'by navigating to the page' do
     visit sign_in_path
 
     click_link I18n.t('sessions.new.forgot_password')
 
-    expect(current_path).to eq new_password_path
+    expect(page).to have_current_path new_password_path, ignore_query: true
   end
 
-  scenario 'with valid email' do
+  it 'with valid email' do
     user = user_with_reset_password
 
     expect_page_to_display_change_password_message
     expect_reset_notification_to_be_sent_to user
   end
 
-  scenario 'with non-user account' do
+  it 'with non-user account' do
     reset_password_for 'unknown.email@example.com'
 
     expect_page_to_display_change_password_message
@@ -65,7 +65,7 @@ RSpec.feature 'Visitor resets password', type: :system, js: true do
 
     message = deliveries_email?(recipient:, subject:, body:)
 
-    expect(message).to be
+    expect(message).not_to be_nil
   end
 
   def expect_mailer_to_have_no_deliveries

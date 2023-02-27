@@ -10,18 +10,18 @@ RSpec.describe SequelWrap::Connector, skip_ci: true do
 
   describe '#connect' do
     context 'when DATABASE_URL env is set' do
+      subject(:connector) do
+        described_class.new(env: 'test', logger:)
+      end
+
       around do |example|
         ENV['DATABASE_URL'] = 'postgresql:///postgres'
         example.run
         ENV.delete('DATABASE_URL')
       end
 
-      subject do
-        described_class.new(env: 'test', logger:)
-      end
-
       it 'connects to DATABASE_URL database is pointing' do
-        db = subject.connect
+        db = connector.connect
 
         expect(db.database_type).to eq(:postgres)
         expect(db.loggers).to eq([logger])
@@ -31,12 +31,12 @@ RSpec.describe SequelWrap::Connector, skip_ci: true do
     end
 
     context 'when a valid env is given' do
-      subject do
+      subject(:connector) do
         described_class.new env: 'test', logger:
       end
 
       it 'connects to the given env' do
-        db = subject.connect
+        db = connector.connect
 
         expect(db.database_type).to eq(:postgres)
         expect(db.opts[:database]).to eq('waterflow_app_test')
@@ -46,13 +46,13 @@ RSpec.describe SequelWrap::Connector, skip_ci: true do
     end
 
     context 'when a invalid env is given' do
-      subject do
+      subject(:connector) do
         described_class.new env: 'non-enviroment', logger:
       end
 
       it 'raise an error' do
         expect do
-          subject.connect
+          connector.connect
         end.to raise_error(KeyError)
       end
     end
