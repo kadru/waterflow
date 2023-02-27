@@ -14,6 +14,6 @@ RSpec.describe 'User add geolocation to a gage', type: :system, js: true do
     click_button(translate!('helpers.submit.simple'))
 
     expect(page).to have_content(translate!('flash.success.update'))
-    expect(page).to have_css('.js-gage-map', visible: false) # This renders a map
+    expect(page).to have_css('.js-gage-map', visible: :all) # This renders a map
   end
 end

@@ -1,5 +1,6 @@
 require:
   - rubocop-rails
+  - rubocop-rspec
 AllCops:
   Exclude:
     - 'spec/rails_helper.rb'
@@ -22,6 +23,14 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
 Rails/SkipsModelValidations:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Max: 12
+RSpec/NestedGroups:
+  Max: 4
+RSpec/BeforeAfterAll:
+  Enabled: false
+RSpec/ExampleLength:
   Enabled: false
 Style/FormatStringToken:
   Enabled: false

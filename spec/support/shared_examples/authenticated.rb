@@ -6,7 +6,7 @@ RSpec.shared_examples 'authenticated' do |path|
       test_path = send(path)
       visit(test_path)
 
-      expect(current_path).to eq(sign_in_path)
+      expect(page).to have_current_path(sign_in_path, ignore_query: true)
     end
   end
 end

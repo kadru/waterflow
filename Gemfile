@@ -40,6 +40,7 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rubocop', '~> 1.18', require: false
   gem 'rubocop-rails', '~> 2.18'
+  gem 'rubocop-rspec', '~> 2.18'
   # gem 'solargraph'
   # gem 'spring'
   # gem 'spring-watcher-listen', '~> 2.0.0'

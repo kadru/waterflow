@@ -12,7 +12,7 @@ RSpec.describe GageMapComponent, type: :component do
   it 'renders the map' do
     token = ENV['MAPBOX_TOKEN']
     gage = create(:gage)
-    subject = GageMapComponent.new(gage:)
+    subject = described_class.new(gage:)
     render_inline(subject)
 
     expect(rendered_component).to have_selector("[id='gage_map_#{gage.id}']")

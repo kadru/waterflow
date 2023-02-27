@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Gages reports', type: :system, js: true do
-  feature 'generate gage report' do
+  describe 'generate gage report' do
     let(:user) { create(:user) }
 
     context 'when given valid dates' do
-      scenario 'sends an email and returns and success message' do
+      it 'sends an email and returns and success message' do
         create(:gage_with_waterflows)
 
         visit new_reports_path(as: user)
@@ -22,7 +22,7 @@ RSpec.describe 'Gages reports', type: :system, js: true do
     end
 
     context 'when give invalid dates' do
-      scenario 'shows a alert message' do
+      it 'shows a alert message' do
         create(:gage_with_waterflows)
 
         visit new_reports_path(as: user)

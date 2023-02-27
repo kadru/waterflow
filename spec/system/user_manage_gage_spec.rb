@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe 'User manage gages', type: :system, js: true do
   let(:user) { create(:admin) }
 
-  feature 'User visits gage index' do
-    scenario 'sees a list of gages' do
+  describe 'User visits gage index' do
+    it 'sees a list of gages' do
       gages = create_list(:gage_with_waterflows, 2, offset: 3600)
       gages.each_with_index do |gage, index|
         create(:waterflow, gage:, captured_at: Time.zone.local(2021, 6, 12, index, 15))
@@ -16,10 +16,8 @@ RSpec.describe 'User manage gages', type: :system, js: true do
       visit gages_path(as: user)
       rows = all('.gage-row')
 
-      rows.each do |row|
-        expect(row).to have_content('conchos')
-        expect(row).to have_link(href: %r{http://example.com/})
-      end
+      expect(rows).to all(have_content('conchos'))
+      expect(rows).to all(have_link(href: %r{http://example.com/}))
 
       gages.each do |gage|
         expect(page).to have_content(gage.last_waterflow_captured_at.to_formatted_s(:report))
@@ -27,8 +25,8 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
   end
 
-  feature 'User creates a new gage' do
-    scenario 'sees the created gage on edit page' do
+  describe 'User creates a new gage' do
+    it 'sees the created gage on edit page' do
       visit new_gage_path(as: user)
 
       within '#gage-form' do
@@ -49,7 +47,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
 
     context 'when tries to create a gage with invalid data' do
-      scenario 'sees a error message' do
+      it 'sees a error message' do
         visit new_gage_path(as: user)
 
         within '#gage-form' do
@@ -66,7 +64,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
 
     context 'when user is not admin' do
-      scenario 'see a unauthorized error message' do
+      it 'see a unauthorized error message' do
         user = create(:user, admin: false)
         visit new_gage_path(as: user)
 
@@ -75,10 +73,10 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
   end
 
-  feature 'User updates a gage' do
+  describe 'User updates a gage' do
     let!(:gage) { create(:gage, offset: 3600) }
 
-    scenario 'see the changes on gage edit page' do
+    it 'see the changes on gage edit page' do
       visit gages_path(as: user)
 
       click_link(href: "/gages/#{gage.id}/edit")
@@ -94,7 +92,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
 
     context 'when tries to update with invalid data' do
-      scenario 'sees an error message' do
+      it 'sees an error message' do
         visit gages_path(as: user)
         click_link(href: "/gages/#{gage.id}/edit")
         within '#gage-form' do
@@ -109,7 +107,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
 
     context 'when user is not admin' do
-      scenario 'see a unauthorized error message' do
+      it 'see a unauthorized error message' do
         user = create(:user, admin: false)
         visit gages_path(as: user)
         click_link(href: "/gages/#{gage.id}/edit")
@@ -119,8 +117,8 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
   end
 
-  feature 'User deletes a gage' do
-    scenario 'the deleted gage is not in the gage index' do
+  describe 'User deletes a gage' do
+    it 'the deleted gage is not in the gage index' do
       gage = create(:gage)
 
       visit gages_path(as: user)
@@ -132,7 +130,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
 
     context 'when user is not admin' do
-      scenario 'see a unauthorized error message' do
+      it 'see a unauthorized error message' do
         user = create(:user, admin: false)
         gage = create(:gage)
 
@@ -146,8 +144,8 @@ RSpec.describe 'User manage gages', type: :system, js: true do
     end
   end
 
-  feature 'Users search for a gage by name' do
-    scenario 'sees gages that matches the given name' do
+  describe 'Users search for a gage by name' do
+    it 'sees gages that matches the given name' do
       create(:gage, name: 'Conchos')
       create(:gage, name: 'Texas')
 
@@ -157,7 +155,7 @@ RSpec.describe 'User manage gages', type: :system, js: true do
       click_on translate!('btns.search')
 
       expect(page).to have_content('Conchos')
-      expect(page).to_not have_content('Texas')
+      expect(page).not_to have_content('Texas')
     end
 
     context 'when there is not matches' do

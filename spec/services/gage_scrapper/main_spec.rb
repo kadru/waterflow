@@ -40,16 +40,16 @@ RSpec.describe GageScrapper::Main do
   end
 
   describe '#call' do
+    subject(:service) do
+      described_class.new gage:, remote_table: GageScrapper::RemoteTable.new(gage.url)
+    end
+
     let(:gage) do
       create(:gage, url: 'https://ibwc.gov/gage_id.txt', offset: -6.hours.seconds)
     end
 
     let(:body) { 'wad.txt' }
     let(:status) { 200 }
-
-    subject(:service) do
-      described_class.new gage:, remote_table: GageScrapper::RemoteTable.new(gage.url)
-    end
 
     it 'downloads waterflow data and save it to a gage' do
       service.call

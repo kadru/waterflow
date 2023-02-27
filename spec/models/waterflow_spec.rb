@@ -46,6 +46,7 @@ RSpec.describe Waterflow, type: :model do
   describe '#precipitation' do
     it { is_expected.to validate_numericality_of(:precipitation).allow_nil }
   end
+
   describe '#unique_error?' do
     let(:gage) { create(:gage) }
     let(:date) { Time.zone.local(2020, 1, 1, 23, 0) }
@@ -83,7 +84,7 @@ RSpec.describe Waterflow, type: :model do
   end
 
   describe '#captured_at' do
-    context 'validations' do
+    describe 'validations' do
       subject { described_class.new gage: create(:gage) }
 
       it { is_expected.to validate_presence_of(:captured_at) }
@@ -107,7 +108,7 @@ RSpec.describe Waterflow, type: :model do
 
     context 'when has no gage' do
       it 'raises an error' do
-        waterflow = Waterflow.create captured_at: Time.zone.local(2020, 3, 8, 2, 45, 0)
+        waterflow = described_class.create captured_at: Time.zone.local(2020, 3, 8, 2, 45, 0)
         expect do
           waterflow.local_captured_at
         end.to raise_error(Waterflow::InvalidGageError)
@@ -116,7 +117,7 @@ RSpec.describe Waterflow, type: :model do
 
     context 'when gage captured_at is nil' do
       it 'returns nil' do
-        waterflow = Waterflow.new captured_at: nil
+        waterflow = described_class.new captured_at: nil
 
         expect(waterflow.local_captured_at).to be_nil
       end

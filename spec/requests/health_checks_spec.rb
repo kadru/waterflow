@@ -7,7 +7,7 @@ RSpec.describe 'Health checks', type: :request do
     it 'returns status 200' do
       get health_path
 
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 end
