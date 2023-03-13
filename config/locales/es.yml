@@ -20,6 +20,9 @@ es:
         offset_minutes: desplaz. minutos
         latitude: latitud
         longitude: longitud
+      user:
+        email: correo
+        password: contraseña
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'
