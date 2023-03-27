@@ -5,25 +5,7 @@
       <div class="-space-y-px rounded-md shadow-sm">
         <div>
           <%= f.label :password, class: "sr-only" %>
-          <%= f.password_field :password,
-                                placeholder: t("helpers.label.session.password"),
-                                class: %w[relative
-                                                  block
-                                                  w-full
-                                                  appearance-none
-                                                  rounded-none
-                                                  rounded-t-md
-                                                  border
-                                                  border-gray-300
-                                                  px-3
-                                                  py-2
-                                                  text-gray-900
-                                                  placeholder-gray-500
-                                                  focus:z-10
-                                                  focus:border-indigo-500
-                                                  focus:outline-none
-                                                  focus:ring-indigo-500
-                                                  sm:text-sm] %>
+          <%= render "shared/fields/password", form: f %>
         </div>
       </div>
       <div>
