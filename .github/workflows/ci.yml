@@ -96,5 +96,12 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/waterflow_app_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          SIMPLE_COV: true
           CI: true
         run: bundle exec rspec --tag ~skip_ci
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        if: success() || failure()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

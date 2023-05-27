@@ -55,6 +55,7 @@ group :test do
   gem 'selenium-webdriver', '~> 4.0'
   gem 'shoulda-matchers', '~> 4.2.0'
   gem 'simplecov', require: false
+  gem 'simplecov-cobertura', require: false
   gem 'webdrivers', '~> 5.0'
   gem 'webmock'
 end
