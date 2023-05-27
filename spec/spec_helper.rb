@@ -2,6 +2,8 @@
 
 if ENV.fetch('SIMPLE_COV', false)
   require 'simplecov'
+  require 'simplecov-cobertura'
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
   SimpleCov.start 'rails' do
     enable_coverage :branch
 
