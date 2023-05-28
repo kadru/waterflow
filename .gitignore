@@ -41,5 +41,7 @@ coverage
 /spec/examples.txt
 
 .env
-.env.test
-.env.development
+.env.*
+.compose.env
+.postgres.env
+

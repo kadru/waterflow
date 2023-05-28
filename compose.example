@@ -1,0 +1,3 @@
+# Choose a port that makes no conflicts with your local setup
+POSTGRES_PORT=6432
+SIDEKIQ_REDIS_PORT=7379

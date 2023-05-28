@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:11
+    restart: unless-stopped
+    ports:
+      - ${POSTGRES_PORT}:5432
+    env_file:
+      - .postgres.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  sidekiq_redis:
+    image: redis:6.2
+    restart: unless-stopped
+    ports:
+      - ${SIDEKIQ_REDIS_PORT}:6379
+    volumes:
+      - sidekiq_redis_data:/data
+
+volumes:
+  postgres_data:
+  sidekiq_redis_data:
