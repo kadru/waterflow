@@ -1,24 +1,38 @@
-# README
+# Waterflow
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+- ruby 3.1.x
+- node 14.x
+- redis 6.x
+- postgresql 11
+- Docker ~> 24
+- Docker compose ~> 1.29
 
-* Ruby version
+## Setup project environment variables
 
-* System dependencies
+1. Copy `env.development.example` to `env.development.local` and `.env.test.example` to `.env.test.local`
 
-* Configuration
+    ```bash
+    cp env.development.examplet .env.development.local && cp env.test.example .env.test.local
+    ```
 
-* Database creation
+2. Change the values for appropiate ones.
 
-* Database initialization
+## Setup database
 
-* How to run the test suite
+### With docker-compose
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Copy `compose.example` and `.postgres.env` to `.compose.env` and `.postgres.env`.
 
-* Deployment instructions
+    ```bash
+    cp compose.example .compose.env && cp postgres.example .postgres.env
+    ```
 
-* ...
+2. Change the values of the variables for appropiate ones. For example choose a more secure password for postgres and choose and port that make no conflict with local setup
+
+3. Start the containers
+
+    ```bash
+    sudo docker-compose --env-file .compose.env up
+    ```

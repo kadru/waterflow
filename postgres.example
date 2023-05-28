@@ -1,0 +1,2 @@
+# Choose a more secure password
+POSTGRES_PASSWORD=postgres
