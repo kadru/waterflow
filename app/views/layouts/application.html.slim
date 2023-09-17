@@ -24,7 +24,7 @@ html
     meta name='theme-color' content='#00b8d4'
   body
     = render partial: "navbar"
-    .container
+    .container.mx-auto
       = yield
 
   javascript nonce="#{content_security_policy_nonce}":
