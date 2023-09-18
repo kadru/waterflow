@@ -5,3 +5,8 @@
 .z-2 {
  z-index: 2;
 }
+
+.js-gage-map {
+  height: 500px;
+  margin-bottom: 10px;
+}

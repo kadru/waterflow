@@ -1,0 +1,54 @@
+<h3 class="text-base font-semibold leading-7 text-gray-900">
+  <% if gage.persisted? %>
+    <%= t('gage_component.edit') %>
+  <% else %>
+    <%= t('gage_component.new') %>
+  <% end %>
+</h3>
+
+<%= form_with model: gage, local: true, id: 'gage-form' do |f| %>
+  <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :ibcw_id %>
+      <%= render "shared/fields/text", form: f, attribute: :ibcw_id %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :name %>
+      <%= render "shared/fields/text", form: f, attribute: :name %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :url %>
+      <%= render "shared/fields/text", form: f, attribute: :url %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :offset_hours %>
+      <%= render "shared/fields/number", form: f, attribute: :offset_hours %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :offset_minutes %>
+      <%= render "shared/fields/number", form: f, attribute: :offset_minutes %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :latitude %>
+      <%= render "shared/fields/number", form: f, attribute: :latitude %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :longitude %>
+      <%= render "shared/fields/number", form: f, attribute: :longitude %>
+    </div>
+  </div>
+
+ <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= render "shared/fields/button", form: f, text: t('helpers.submit.simple') %>
+ </div>
+<% end %>
+
+<% if gage.persisted? %>
+  <%= render GageMapComponent.new(gage: gage) %>
+<% end %>
