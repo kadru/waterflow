@@ -1,0 +1,30 @@
+<%= content_for :page_title do %>
+   Reportes
+<% end %>
+
+<h3>
+  Nuevo Reporte
+</h3>
+
+<%= form_with model: report_form, url: reports_path, local: true do |f| %>
+  <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :gage_id %>
+      <%= render "shared/fields/select", form: f, attribute: :gage_id, options: gages %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :start_date %>
+      <%= render "shared/fields/date", form: f, attribute: :start_date %>
+    </div>
+
+    <div class="col-span-full">
+      <%= render "shared/fields/label", form: f, attribute: :end_date %>
+      <%= render "shared/fields/date", form: f, attribute: :end_date %>
+    </div>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= render "shared/fields/button", form: f, text: t('helpers.submit.report.submit') %>
+ </div>
+<% end %>

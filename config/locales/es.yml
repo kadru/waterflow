@@ -213,6 +213,8 @@ es:
         submit: Entrar
       user:
         create: Registrarse
+      report:
+        submit: Generar
     label:
       password:
         email: Email
