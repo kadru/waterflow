@@ -5,7 +5,8 @@ module.exports = {
     relative: true,
     files: [
       './app/views/**/*.html.slim',
-      './app/views/**/*.html.erb'
+      './app/views/**/*.html.erb',
+      './app/components/**/*.html.{slim,erb}'
     ]
   },
   theme: {
