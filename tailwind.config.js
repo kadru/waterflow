@@ -6,7 +6,8 @@ module.exports = {
     files: [
       './app/views/**/*.html.slim',
       './app/views/**/*.html.erb',
-      './app/components/**/*.html.{slim,erb}'
+      './app/components/**/*.html.{slim,erb}',
+      './app/components/**/*.rb'
     ]
   },
   theme: {
