@@ -25,7 +25,6 @@ document.addEventListener('turbolinks:load', () => {
 
   datePicker.initialize();
   M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'));
-  M.FormSelect.init(document.querySelectorAll('select'));
   sidenavs = M.Sidenav.init(document.querySelectorAll('.sidenav'));
   tooltips = M.Tooltip.init(document.querySelectorAll('.tooltipped'));
   
