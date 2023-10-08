@@ -72,7 +72,6 @@ RSpec.configure do |config|
   end
 
   config.before(:all, type: :system) do
-    WebMock.disable_net_connect!(allow_localhost: true, allow: [/github.com/, /chromedriver.storage.googleapis.com/])
     driven_by :rack_test
   end
 
