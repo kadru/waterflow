@@ -40,7 +40,7 @@ RSpec.describe 'Visitor signs in', type: :system, js: true do
   end
 
   def expect_page_to_display_sign_in_error
-    expect(page.body).to include(
+    expect(page).to have_content(
       I18n.t('flashes.failure_after_create', sign_up_path:)
     )
   end

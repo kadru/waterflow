@@ -16,7 +16,7 @@ gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'pg_search'
 gem 'puma', '~> 5.6'
-gem 'rails', '~> 7.0'
+gem 'rails', '~> 7.0.4'
 gem 'sass-rails', '>= 6'
 gem 'sequel', require: false
 gem 'sequel_pg', require: false
@@ -51,11 +51,9 @@ group :test do
   gem 'capybara', '~> 3.30'
   gem 'database_cleaner', '~> 1.7.0'
   gem 'factory_bot_rails'
-  # gem 'rspec-benchmark'
   gem 'selenium-webdriver', '~> 4.0'
   gem 'shoulda-matchers', '~> 4.2.0'
   gem 'simplecov', require: false
   gem 'simplecov-cobertura', require: false
-  gem 'webdrivers', '~> 5.0'
   gem 'webmock'
 end
