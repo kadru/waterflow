@@ -76,6 +76,7 @@ RSpec.configure do |config|
   end
 
   config.before(:all, js: true) do
+    WebMock.disable_net_connect!(allow_localhost: true)
     driven_by :selenium, using: :headless_chrome
   end
 
